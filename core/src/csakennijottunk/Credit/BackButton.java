@@ -11,7 +11,7 @@ public class BackButton extends OneSpriteStaticActor {
     ClickListener c1;
     public BackButton(MyGame game) {
         super(game, "badlogic.jpg");
-        this.setSize(100, 100);
+        this.setSize(50, 50);
         this.setPosition(0, 0);
         this.addListener(c1 = new ClickListener() {
             @Override
