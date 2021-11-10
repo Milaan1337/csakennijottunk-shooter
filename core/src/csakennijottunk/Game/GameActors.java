@@ -11,10 +11,10 @@ public class GameActors extends OneSpriteStaticActor {
 
 class PlayerActor extends OneSpriteStaticActor {
     public PlayerActor(MyGame game){
-        super(game, "green.png");
-        this.setWidth(20);
-        this.setHeight(30);
-        this.setX(0);
-        this.setY(0);
+        super(game, "badlogic.jpg");
+        this.setWidth(50);
+        this.setHeight(50);
+        this.setX(200);
+        this.setY(200);
     }
 }
