@@ -3,6 +3,7 @@ package csakennijottunk;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
+import csakennijottunk.Game.GrassActor;
 import csakennijottunk.Game.PlayerActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -53,13 +54,13 @@ public class Level {
             for (int x = 0; x < width; x++) {
                 switch (levelarray[x][y]){
                     case 'o':
-                        MyActor m = new PlayerActor(stage.game);
-                        m.setPosition(x*21, y*20);
+                        MyActor m = new GrassActor(stage.game);
+                        m.setPosition(x*10, y*20);
                         stage.addActor(m);
                         break;
                     case 'x':
-                        MyActor d = new PlayerActor(stage.game);
-                        d.setPosition(x*20, y*20);
+                        MyActor d = new GrassActor(stage.game);
+                        d.setPosition(x*10, y*20);
                         stage.addActor(d);
                         break;
                 }
