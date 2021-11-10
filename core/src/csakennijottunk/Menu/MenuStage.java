@@ -8,14 +8,17 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 
 public class MenuStage extends MyStage {
-    MenuActor menuActor;
+    ExitBUtton exitBUtton;
+    StartButton startButton;
     public MenuStage( MyGame game) {
         super(new ResponseViewport(500), game);
+        setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
-        menuActor = new MenuActor(game);
-        addActor(menuActor);
-        menuActor.setY(0);
-        menuActor.setX(0);
+        exitBUtton = new ExitBUtton(game);
+        addActor(exitBUtton);
+        startButton = new StartButton(game);
+        addActor(startButton);
+
 
     }
 }
