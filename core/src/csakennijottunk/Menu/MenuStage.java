@@ -10,6 +10,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 public class MenuStage extends MyStage {
     ExitBUtton exitBUtton;
     StartButton startButton;
+    CreditButton creditButton;
     public MenuStage( MyGame game) {
         super(new ResponseViewport(500), game);
         setCameraResetToCenterOfScreen();
@@ -18,6 +19,8 @@ public class MenuStage extends MyStage {
         addActor(exitBUtton);
         startButton = new StartButton(game);
         addActor(startButton);
+        creditButton = new CreditButton(game);
+        addActor(creditButton);
 
 
     }
