@@ -11,7 +11,7 @@ public class MenuStage extends MyStage {
     ExitBUtton exitBUtton;
     StartButton startButton;
     CreditButton creditButton;
-    public MenuStage( MyGame game) {
+    public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
