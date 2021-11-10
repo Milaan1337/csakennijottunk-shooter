@@ -9,6 +9,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 public class GameStage extends MyStage {
 
     public GameStage(MyGame game) {
-        super(new ResponseViewport(500), game);
+        super(new ResponseViewport(501), game);
     }
 }
