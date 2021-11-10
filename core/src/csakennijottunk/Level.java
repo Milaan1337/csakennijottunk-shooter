@@ -54,7 +54,7 @@ public class Level {
                 switch (levelarray[x][y]){
                     case 'o':
                         MyActor m = new PlayerActor(stage.game);
-                        m.setPosition(x*20, y*20);
+                        m.setPosition(x*21, y*20);
                         stage.addActor(m);
                         break;
                     case 'x':
