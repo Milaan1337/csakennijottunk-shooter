@@ -1,4 +1,4 @@
-package csakennijottunk;
+package csakennijottunk.Menu;
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 

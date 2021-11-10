@@ -1,11 +1,11 @@
-package csakennijottunk;
+package csakennijottunk.Menu;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 
-public class GameScreen extends MyScreen {
-    public GameScreen(MyGame game) {
+public class MenuScreen extends MyScreen {
+    public MenuScreen(MyGame game) {
         super(game);
     }
 
@@ -16,6 +16,6 @@ public class GameScreen extends MyScreen {
 
     @Override
     protected void afterAssetsLoaded() {
-        addStage(new GameStage(game), 1, true);
+        addStage(new MenuStage(game),0,true);
     }
 }
