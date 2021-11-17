@@ -6,38 +6,52 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class PlayerActor extends OneSpriteStaticActor {
     boolean isJumping = false;
-    boolean fix = false;
-    boolean sokleszaboolean = false;
+    float oldPos;
+    boolean isFalling;
     public PlayerActor(MyGame game){
         super(game, "green.png");
         this.setWidth(200);
-        this.setHeight(300);
+        this.setHeight(150);
         this.setX(0);
         this.setY(0);
     }
 
     public void jump(){
         isJumping = true;
+        float oldPos = this.getY();
     }
+
+    public void fall(){
+        isJumping = false;
+        isFalling = true;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
-        this.setX(this.getX() + 1);
         if (isJumping == true){
-            sokleszaboolean = true;
-            if (this.getY() < 200 && fix == false && sokleszaboolean == true) {
-                this.setY(this.getY() + 5);
+            System.out.println("isJumping jó");
+            float currentPos = this.getY();
+            if (currentPos >= -15 && currentPos < (501 - this.getHeight() + 9)/2) {
+                System.out.println("pos jó");
+                this.setY(this.getY() + 15);
+                isFalling = false;
             }
-            System.out.println(this.getY());
-            if (this.getY() == 200 || fix == true && sokleszaboolean == true){
-                this.fix = true;
-              this.setY(this.getY() - 10);
-            }
+        }
 
-            if (this.getY() < 0){
-                sokleszaboolean = false;
+        if (this.getY() == (501 - this.getHeight() + 9)/2){
+            fall();
+        }
+
+        if (isFalling == true){
+            float currentPos = this.getY();
+            if (currentPos <= 501-this.getHeight() + 9 && currentPos >= 0) {
+                this.setY(this.getY() - 15);
+                System.out.println("Y:" + this.getY());
+                if (currentPos <= -15){
+                    isFalling = false;
+                }
             }
         }
     }
-
 }

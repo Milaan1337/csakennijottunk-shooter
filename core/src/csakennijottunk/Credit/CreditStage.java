@@ -13,10 +13,10 @@ public class CreditStage extends MyStage {
         super(new ResponseViewport(500),game);
         setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
-        backButton = new BackButton(game);
-        addActor(backButton);
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getMyAssetManager().getFont("alegreyaregular.otf");
+
+
 
         MyLabel label = new MyLabel(game, "Készítők:", labelStyle);
         label.setFontScale(0.5f);
