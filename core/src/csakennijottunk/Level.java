@@ -55,12 +55,12 @@ public class Level {
                 switch (levelarray[x][y]){
                     case 'o':
                         MyActor m = new GrassActor(stage.game);
-                        m.setPosition(x*10, y*20);
+                        m.setPosition(x*30, y*50);
                         stage.addActor(m);
                         break;
                     case 'x':
                         MyActor d = new GrassActor(stage.game);
-                        d.setPosition(x*10, y*20);
+                        d.setPosition(x*30, y*50);
                         stage.addActor(d);
                         break;
                 }
