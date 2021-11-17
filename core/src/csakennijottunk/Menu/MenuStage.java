@@ -3,6 +3,7 @@ package csakennijottunk.Menu;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import csakennijottunk.Game.BearActor;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
@@ -21,7 +22,7 @@ public class MenuStage extends MyStage {
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-
+        addActor(new BearActor(game));
 
     }
 }
