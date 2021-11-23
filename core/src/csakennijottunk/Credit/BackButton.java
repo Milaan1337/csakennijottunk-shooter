@@ -10,7 +10,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class BackButton extends OneSpriteStaticActor {
     ClickListener c1;
     public BackButton(MyGame game) {
-        super(game, "badlogic.jpg");
+        super(game, "BackButton.png");
         this.setSize(50, 50);
         this.setPosition(0, 0);
         this.addListener(c1 = new ClickListener() {

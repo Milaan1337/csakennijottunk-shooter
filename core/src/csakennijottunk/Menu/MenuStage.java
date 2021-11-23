@@ -25,16 +25,23 @@ public class MenuStage extends MyStage {
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         //setCameraResetToCenterOfScreen();
+        background = new MenuBackground(game);
+        background.setSize(888.88888888f, 500);
+        addActor(background);
         addBackButtonScreenBackByStackPopListener();
         exitBUtton = new ExitBUtton(game);
+        exitBUtton.setY(0);
+        exitBUtton.setX(430);
         addActor(exitBUtton);
         startButton = new StartButton(game);
+        startButton.setY(280);
+        startButton.setX(430);
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-        background = new MenuBackground(game);
-        addActor(background);
-        setCameraTracking(new CameraTrackingToActors());
+        creditButton.setY(150);
+        creditButton.setX(430);
+        /*setCameraTracking(new CameraTrackingToActors());
         RandomXS128 r = new RandomXS128();
         for(int i = 0; i< 10; i++){
             OneSpriteStaticActor oneSpriteStaticActor = new OneSpriteStaticActor(game, "fa.png"){
@@ -59,6 +66,6 @@ public class MenuStage extends MyStage {
             //oneSpriteStaticActor.setPosition(200,100);
             addActor(oneSpriteStaticActor);
             ((CameraTrackingToActors)getCameraTracking()).addActor(oneSpriteStaticActor);
-        }
+        }*/
     }
 }

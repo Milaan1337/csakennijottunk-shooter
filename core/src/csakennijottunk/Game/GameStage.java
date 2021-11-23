@@ -33,16 +33,15 @@ public class GameStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListener();
         setCameraResetToCenterOfScreen();
-        //playerActor = new PlayerActor(game);
-        //addActor(playerActor);
-        backButton = new BackButton(game);
-        backButton.setPosition(0, 451);
-        addActor(backButton);
         BgActor = new BgActor(game);
-        addActor(BgActor);
         BgActor.setZIndex(1);
-        BgActor.setWidth(501);
-        BgActor.setHeight(501);
+        BgActor.setWidth(500);
+        BgActor.setHeight(500);
+        addActor(BgActor);
+        backButton = new BackButton(game);
+        backButton.setPosition(0, 450);
+        addActor(backButton);
+
         Level level = new Level(1,this);
         level.build();
 
@@ -64,12 +63,10 @@ public class GameStage extends MyStage {
             if (a instanceof BearActor){
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
                     System.out.println("overlaps with medve");
+
                 }
             }
         }
 
-        /*if (SimpleOverlapsUtil.overlaps(bearActor, playerActor) == true){
-            System.out.println("overlaps with medve");
-        }*/
     }
 }
