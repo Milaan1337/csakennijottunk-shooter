@@ -65,11 +65,11 @@ public class CameraTrackingToActors extends CameraTracking {
         bottom -= stage.getViewport().getWorldHeight() * marginBottom * orthographicCamera.zoom;
         //System.out.println(" left: " + left + "  top: " + top + "  right: " + right + "  bottom: " + bottom);
         float targetZoom = max(zoomMin, max((right - left) / stage.getViewport().getWorldWidth(), (top - bottom) / stage.getViewport().getWorldHeight()));
-        orthographicCamera.zoom -= (orthographicCamera.zoom - targetZoom) * zoomSpeed;
+        orthographicCamera.zoom -= (orthographicCamera.zoom - targetZoom) * zoomSpeed * delta_time * 60;
         float targetX = left + stage.getViewport().getWorldWidth() / 2 * orthographicCamera.zoom;
-        orthographicCamera.position.x -= (orthographicCamera.position.x - targetX) * moveSpeed;
+        orthographicCamera.position.x -= (orthographicCamera.position.x - targetX) * moveSpeed * delta_time * 60;
         float targetY = bottom  + stage.getViewport().getWorldHeight() / 2 * orthographicCamera.zoom;
-        orthographicCamera.position.y -= (orthographicCamera.position.y - targetY) * moveSpeed;
+        orthographicCamera.position.y -= (orthographicCamera.position.y - targetY) * moveSpeed * delta_time * 60;
 
         //orthographicCamera.update();
     }
