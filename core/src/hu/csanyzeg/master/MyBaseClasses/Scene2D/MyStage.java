@@ -30,6 +30,8 @@ import java.util.ArrayList;
 abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, IElapsedTime {
     public MyGame game;
 
+    public CameraTracking cameraTracking = null;
+
     private MyScreen screen = null;
 
     protected float elapsedTime = 0;
@@ -220,7 +222,6 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
     };
 
 
-    public CameraTracking cameraTracking = null;
 
 
     protected float actTime = 0;
@@ -483,5 +484,14 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
     @Override
     public void setGame(MyGame game) {
         this.game = game;
+    }
+
+    public CameraTracking getCameraTracking() {
+        return cameraTracking;
+    }
+
+    public void setCameraTracking(CameraTracking cameraTracking) {
+        this.cameraTracking = cameraTracking;
+        this.cameraTracking.setStage(this);
     }
 }

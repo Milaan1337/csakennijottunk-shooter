@@ -3,19 +3,26 @@ package csakennijottunk;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
+import csakennijottunk.Game.BearActor;
 import csakennijottunk.Game.GrassActor;
 import csakennijottunk.Game.PlayerActor;
+import csakennijottunk.Game.TreeActor;
+import csakennijottunk.Game.TreeActor2;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class Level {
     char[][] levelarray;
     int width;
     int height;
     MyStage stage;
+    SimpleOverlapsUtil simpleOverlapsUtil;
+    BearActor bearActor;
 
     public Level(int id, MyStage stage) {
         this.stage =stage;
+        bearActor = new BearActor(stage.game);
         FileHandle f = Gdx.files.internal("Levels/" + id + ".txt");
         String[] lines = f.readString().split("\n");
         int max = 0;
@@ -47,24 +54,44 @@ public class Level {
             }
             System.out.println();
         }
+
     }
+
 
     public void build(){
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 switch (levelarray[x][y]){
+                    case 'p':
+                        MyActor p = new PlayerActor(stage.game);
+                        p.setPosition(x*30, y*50);
+                        stage.addActor(p);
+                        break;
+                    case 'm':
+                        bearActor.setPosition(x*30, y*50);
+                        stage.addActor(bearActor);
+                        break;
                     case 'o':
                         MyActor m = new GrassActor(stage.game);
-                        m.setPosition(x*30, y*50);
+                        m.setPosition(x*30, y*30);
+                        m.setZIndex(5);
                         stage.addActor(m);
                         break;
                     case 'x':
-                        MyActor d = new GrassActor(stage.game);
-                        d.setPosition(x*30, y*50);
+                        MyActor d = new TreeActor(stage.game);
+                        d.setPosition(x*50, y * 30);
                         stage.addActor(d);
+                        d.setZIndex(4);
+                        break;
+                    case 't':
+                        MyActor t = new TreeActor2(stage.game);
+                        t.setPosition(x*30, y*20);
+                        stage.addActor(t);
+                        t.setZIndex(2);
                         break;
                 }
             }
         }
     }
+
 }
