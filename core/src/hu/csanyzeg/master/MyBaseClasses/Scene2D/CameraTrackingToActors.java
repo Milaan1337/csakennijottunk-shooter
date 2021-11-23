@@ -57,5 +57,6 @@ public class CameraTrackingToActors extends CameraTracking {
                 }
             }
         }
+        System.out.println(" left: " + left + "  top: " + top + "  right: " + right + "  bottom: " + bottom);
     }
 }
