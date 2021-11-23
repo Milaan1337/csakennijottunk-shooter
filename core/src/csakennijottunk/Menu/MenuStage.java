@@ -12,6 +12,7 @@ public class MenuStage extends MyStage {
     ExitBUtton exitBUtton;
     StartButton startButton;
     CreditButton creditButton;
+    BearActor bearActor;
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         setCameraResetToCenterOfScreen();
@@ -22,7 +23,9 @@ public class MenuStage extends MyStage {
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-        addActor(new BearActor(game));
+        bearActor = new BearActor(game);
+        bearActor.setX(400);
+        addActor(bearActor);
 
     }
 }
