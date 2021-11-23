@@ -32,8 +32,8 @@ public class MenuStage extends MyStage {
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-        addActor(background);
         background = new MenuBackground(game);
+        addActor(background);
         setCameraTracking(new CameraTrackingToActors());
         RandomXS128 r = new RandomXS128();
         for(int i = 0; i< 10; i++){
@@ -43,8 +43,8 @@ public class MenuStage extends MyStage {
                 @Override
                 public void init() {
                     super.init();
-                    rx = r.nextFloat();
-                    ry = r.nextFloat();
+                    rx = r.nextFloat() * 3;
+                    ry = r.nextFloat() * 3;
                 }
 
                 @Override
@@ -55,8 +55,8 @@ public class MenuStage extends MyStage {
                 }
             };
             oneSpriteStaticActor.setSize(30,30);
-            //oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2, getViewport().getWorldHeight() / 2);
-            oneSpriteStaticActor.setPosition(200,100);
+            oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2, getViewport().getWorldHeight() / 2);
+            //oneSpriteStaticActor.setPosition(200,100);
             addActor(oneSpriteStaticActor);
             ((CameraTrackingToActors)getCameraTracking()).addActor(oneSpriteStaticActor);
         }

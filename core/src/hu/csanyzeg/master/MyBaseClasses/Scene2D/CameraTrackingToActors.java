@@ -14,8 +14,8 @@ public class CameraTrackingToActors extends CameraTracking {
     public float marginRight = 0.2f;
     public float marginTop = 0.2f;
     public float zoomMin = 1f;
-    public float zoomSpeed = 1;
-    public float moveSpeed = 1;
+    public float zoomSpeed = 0.05f;
+    public float moveSpeed = 0.05f;
 
     public CameraTrackingToActors() {
     }
@@ -45,13 +45,13 @@ public class CameraTrackingToActors extends CameraTracking {
 
         if (actors.size > 0) {
             for (Actor a : actors) {
-                if (a.getX() + a.getWidth() > right) {
+                if (a.getX() + a.getWidth()  > right) {
                     right = a.getX() + a.getWidth();
                 }
                 if (a.getX() < left) {
                     left = a.getX();
                 }
-                if (a.getY() + a.getHeight() > top) {
+                if (a.getY() + a.getHeight()  > top) {
                     top = a.getY() + a.getHeight();
                 }
                 if (a.getY() < bottom) {
@@ -59,10 +59,18 @@ public class CameraTrackingToActors extends CameraTracking {
                 }
             }
         }
+        left -= stage.getViewport().getWorldWidth() * marginLeft * orthographicCamera.zoom;
+        right += stage.getViewport().getWorldWidth() * marginRight * orthographicCamera.zoom;
+        top += stage.getViewport().getWorldHeight() * marginTop * orthographicCamera.zoom;
+        bottom -= stage.getViewport().getWorldHeight() * marginBottom * orthographicCamera.zoom;
         //System.out.println(" left: " + left + "  top: " + top + "  right: " + right + "  bottom: " + bottom);
-        orthographicCamera.zoom = max(zoomMin, max((right - left) / stage.getViewport().getWorldWidth(), (top - bottom) / stage.getViewport().getWorldHeight()));
-        orthographicCamera.position.x = left + stage.getViewport().getWorldWidth() / 2 * orthographicCamera.zoom;
-        orthographicCamera.position.y = bottom  + stage.getViewport().getWorldHeight() / 2 * orthographicCamera.zoom;
+        float targetZoom = max(zoomMin, max((right - left) / stage.getViewport().getWorldWidth(), (top - bottom) / stage.getViewport().getWorldHeight()));
+        orthographicCamera.zoom -= (orthographicCamera.zoom - targetZoom) * zoomSpeed;
+        float targetX = left + stage.getViewport().getWorldWidth() / 2 * orthographicCamera.zoom;
+        orthographicCamera.position.x -= (orthographicCamera.position.x - targetX) * moveSpeed;
+        float targetY = bottom  + stage.getViewport().getWorldHeight() / 2 * orthographicCamera.zoom;
+        orthographicCamera.position.y -= (orthographicCamera.position.y - targetY) * moveSpeed;
+
         //orthographicCamera.update();
     }
 }
