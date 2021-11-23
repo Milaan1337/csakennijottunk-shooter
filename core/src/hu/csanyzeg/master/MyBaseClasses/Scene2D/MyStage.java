@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -102,9 +103,10 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
             }));
         }
         OrthographicCamera c = (OrthographicCamera) getCamera();
-        cameraTargetX = c.position.x;
-        cameraTargetY = c.position.y;
-        cameraTargetZoom = c.zoom;
+        //cameraTargetX = c.position.x;
+        //cameraTargetY = c.position.y;
+        //cameraTargetZoom = c.zoom;
+        cameraTracking = null;
         setCameraResetToLeftBottomOfScreen();
     }
 
@@ -161,9 +163,10 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
         OrthographicCamera c = (OrthographicCamera)getCamera();
         c.zoom=zoom;
         c.position.set(x,y,0);
-        cameraTargetX = x;
-        cameraTargetY = y;
-        cameraTargetZoom = zoom;
+        //cameraTargetX = x;
+        //cameraTargetY = y;
+        //cameraTargetZoom = zoom;
+        cameraTracking = null;
         c.update();
     }
 
@@ -181,87 +184,6 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
     }
 
 
-    public static float CAMERAINVALID = Float.POSITIVE_INFINITY;
-
-    private float cameraTargetX = CAMERAINVALID;
-    private float cameraTargetY = CAMERAINVALID;
-    private float cameraTargetZoom = CAMERAINVALID;
-    private float cameraMoveSpeed = 20f;
-    private float cameraZoomSpeed = 0.2f;
-
-    public float getCameraMoveToX() {
-        return cameraTargetX;
-    }
-
-    public void setCameraMoveToX(float cameraTargetX) {
-        this.cameraTargetX = cameraTargetX;
-    }
-
-    public float getCameraMoveToY() {
-        return cameraTargetY;
-    }
-
-    public void setCameraMoveToY(float cameraTargetY) {
-        this.cameraTargetY = cameraTargetY;
-    }
-
-    public float getCameraMoveToZoom() {
-        return cameraTargetZoom;
-    }
-
-    public void setCameraMoveToZoom(float cameraTargetZoom) {
-        this.cameraTargetZoom = cameraTargetZoom;
-    }
-
-    public float getCameraMoveSpeed() {
-        return cameraMoveSpeed;
-    }
-
-    public void setCameraMoveSpeed(float cameraMoveSpeed) {
-        this.cameraMoveSpeed = cameraMoveSpeed;
-    }
-
-    public float getCameraZoomSpeed() {
-        return cameraZoomSpeed;
-    }
-
-    public void setCameraZoomSpeed(float cameraZoomSpeed) {
-        this.cameraZoomSpeed = cameraZoomSpeed;
-    }
-
-    public void setCameraMoveToXY(float x, float y)
-    {
-        cameraTargetX = x;
-        cameraTargetY = y;
-    }
-
-
-    public void setCameraMoveToXY(float x, float y, float zoom)
-    {
-        cameraTargetX = x;
-        cameraTargetY = y;
-        cameraTargetZoom = zoom;
-    }
-
-    @Deprecated
-    public void setCameraMoveToXY(float x, float y, float zoom, float speed)
-    {
-        cameraTargetX = x;
-        cameraTargetY = y;
-        cameraTargetZoom = zoom;
-        cameraMoveSpeed = speed;
-        cameraZoomSpeed = speed;
-    }
-
-    @Deprecated
-    public void setCameraMoveToXY(float x, float y, float zoom, float zoomSpeed, float moveSpeed)
-    {
-        cameraTargetX = x;
-        cameraTargetY = y;
-        cameraTargetZoom = zoom;
-        cameraMoveSpeed = moveSpeed;
-        cameraZoomSpeed = zoomSpeed;
-    }
 
 
     public void setCameraResetToCenterOfScreen()
@@ -273,8 +195,9 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
             c.translate((v.getWorldWidth() - v.getMinWorldWidth() / 2) < 0 ? 0 : -((v.getWorldWidth() - v.getMinWorldWidth()) / 2),
                     ((v.getWorldHeight() - v.getMinWorldHeight()) / 2) < 0 ? 0 : -((v.getWorldHeight() - v.getMinWorldHeight()) / 2));
             c.update();
-            cameraTargetX = c.position.x;
-            cameraTargetY = c.position.y;
+            //cameraTargetX = c.position.x;
+            //cameraTargetY = c.position.y;
+            cameraTracking = null;
         }
     }
     public void setCameraResetToLeftBottomOfScreen(){
@@ -282,9 +205,9 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
         Viewport v = getViewport();
         setCameraZoomXY(v.getWorldWidth()/2, v.getWorldHeight()/2,1);
         c.update();
-        cameraTargetX = c.position.x;
-        cameraTargetY = c.position.y;
-
+        //cameraTargetX = c.position.x;
+        //cameraTargetY = c.position.y;
+        cameraTracking = null;
     }
 
     public void resize(int screenWidth, int screenHeight){
@@ -297,6 +220,9 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
     };
 
 
+    public CameraTracking cameraTracking = null;
+
+
     protected float actTime = 0;
     @Override
     public void act(float delta) {
@@ -305,44 +231,8 @@ abstract public class MyStage extends Stage implements IZindex, ITimer, IGame, I
 
         IElapsedTime.super.act(delta);
         ITimer.super.act(delta);
-
-        OrthographicCamera c = (OrthographicCamera)getCamera();
-        if (cameraTargetX!=c.position.x || cameraTargetY!=c.position.y || cameraTargetZoom!=c.zoom){
-            if (cameraTargetX != CAMERAINVALID && cameraTargetY != CAMERAINVALID) {
-                if (Math.abs(c.position.x - cameraTargetX) < cameraMoveSpeed * delta) {
-                    c.position.x = (c.position.x + cameraTargetX) / 2f;
-                } else {
-                    if (c.position.x < cameraTargetX) {
-                        c.position.x += cameraMoveSpeed * delta;
-                    } else {
-                        c.position.x -= cameraMoveSpeed * delta;
-                    }
-                }
-
-                if (Math.abs(c.position.y - cameraTargetY) < cameraMoveSpeed * delta) {
-                    c.position.y = (c.position.y + cameraTargetY) / 2f;
-                } else {
-                    if (c.position.y < cameraTargetY) {
-                        c.position.y += cameraMoveSpeed * delta;
-                    } else {
-                        c.position.y -= cameraMoveSpeed * delta;
-                    }
-                }
-                c.update();
-            }
-            if (cameraTargetZoom != CAMERAINVALID) {
-                System.out.println(cameraTargetZoom == CAMERAINVALID);
-                if (Math.abs(c.zoom - cameraTargetZoom) < cameraZoomSpeed * delta) {
-                    c.zoom = (c.zoom + cameraTargetZoom) / 2f;
-                } else {
-                    if (c.zoom < cameraTargetZoom) {
-                        c.zoom += cameraZoomSpeed * delta;
-                    } else {
-                        c.zoom -= cameraZoomSpeed * delta;
-                    }
-                }
-                c.update();
-            }
+        if (cameraTracking != null) {
+            cameraTracking.act(delta);
         }
         actTime = ((float)(TimeUtils.nanoTime() - nanoTimet)) / 100000;
     }
