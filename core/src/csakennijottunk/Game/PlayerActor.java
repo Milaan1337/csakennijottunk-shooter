@@ -2,6 +2,7 @@ package csakennijottunk.Game;
 
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class PlayerActor extends OneSpriteStaticActor {
@@ -15,6 +16,8 @@ public class PlayerActor extends OneSpriteStaticActor {
         this.setX(0);
         this.setY(30);
     }
+
+
 
     public void jump(){
         isJumping = true;
