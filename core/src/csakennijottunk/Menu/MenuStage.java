@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import csakennijottunk.Game.BearActor;
+import csakennijottunk.Game.MenuBackground;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -19,6 +20,7 @@ public class MenuStage extends MyStage {
     StartButton startButton;
     CreditButton creditButton;
     BearActor bearActor;
+    MenuBackground background;
 
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -30,7 +32,8 @@ public class MenuStage extends MyStage {
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-
+        addActor(background);
+        background = new MenuBackground(game);
         setCameraTracking(new CameraTrackingToActors());
         RandomXS128 r = new RandomXS128();
         for(int i = 0; i< 10; i++){
