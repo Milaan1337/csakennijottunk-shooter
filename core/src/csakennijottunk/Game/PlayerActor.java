@@ -13,7 +13,7 @@ public class PlayerActor extends OneSpriteStaticActor {
         this.setWidth(200);
         this.setHeight(150);
         this.setX(0);
-        this.setY(0);
+        this.setY(30);
     }
 
     public void jump(){
@@ -29,10 +29,11 @@ public class PlayerActor extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        this.setX(this.getX() + 1);
         if (isJumping == true){
             System.out.println("isJumping jó");
             float currentPos = this.getY();
-            if (currentPos >= -15 && currentPos < (501 - this.getHeight() + 9)/2) {
+            if (currentPos >= 30 && currentPos < (501 - this.getHeight() + 9)/2) {
                 System.out.println("pos jó");
                 this.setY(this.getY() + 15);
                 isFalling = false;
@@ -48,7 +49,7 @@ public class PlayerActor extends OneSpriteStaticActor {
             if (currentPos <= 501-this.getHeight() + 9 && currentPos >= 0) {
                 this.setY(this.getY() - 15);
                 System.out.println("Y:" + this.getY());
-                if (currentPos <= -15){
+                if (currentPos <= 45){
                     isFalling = false;
                 }
             }

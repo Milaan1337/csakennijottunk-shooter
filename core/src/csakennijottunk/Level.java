@@ -58,7 +58,6 @@ public class Level {
                     case 'o':
                         MyActor m = new GrassActor(stage.game);
                         m.setPosition(x*30, y*30);
-                        m.setPosition(x*30, y*50);
                         m.setZIndex(5);
                         stage.addActor(m);
                         break;
