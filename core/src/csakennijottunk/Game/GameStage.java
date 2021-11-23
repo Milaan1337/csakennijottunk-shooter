@@ -1,5 +1,6 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -12,18 +13,28 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class GameStage extends MyStage {
-    PlayerActor playerActor;
+    PlayerActor playerActor = null;
     ClickListener clickListener;
     BackButton backButton;
     BgActor BgActor;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
+
+    public Actor getActor(Class c){
+        for (Actor a: getActors()) {
+            if (c.isInstance(a)){
+                return a;
+            }
+        }
+        return null;
+    }
+
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListener();
         setCameraResetToCenterOfScreen();
-        playerActor = new PlayerActor(game);
-        addActor(playerActor);
+        //playerActor = new PlayerActor(game);
+        //addActor(playerActor);
         backButton = new BackButton(game);
         backButton.setPosition(0, 451);
         addActor(backButton);
@@ -35,6 +46,7 @@ public class GameStage extends MyStage {
         Level level = new Level(1,this);
         level.build();
 
+        playerActor = (PlayerActor) getActor(PlayerActor.class);
 
         addListener(clickListener = new ClickListener(){
             @Override
@@ -46,10 +58,18 @@ public class GameStage extends MyStage {
 
     }
 
-    /*public void act(float delta){
+    public void act(float delta){
         super.act(delta);
-        if (SimpleOverlapsUtil.overlaps(bearActor, playerActor) == true){
-            System.out.println("overlaps with medve");
+        for (Actor a: getActors()) {
+            if (a instanceof BearActor){
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+                    System.out.println("overlaps with medve");
+                }
+            }
         }
-    }*/
+
+        /*if (SimpleOverlapsUtil.overlaps(bearActor, playerActor) == true){
+            System.out.println("overlaps with medve");
+        }*/
+    }
 }

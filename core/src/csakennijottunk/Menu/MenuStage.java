@@ -22,7 +22,7 @@ public class MenuStage extends MyStage {
 
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        setCameraResetToCenterOfScreen();
+        //setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
         exitBUtton = new ExitBUtton(game);
         addActor(exitBUtton);
@@ -53,6 +53,7 @@ public class MenuStage extends MyStage {
             };
             oneSpriteStaticActor.setSize(30,30);
             oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2, getViewport().getWorldHeight() / 2);
+            //oneSpriteStaticActor.setPosition(0,0);
             addActor(oneSpriteStaticActor);
             ((CameraTrackingToActors)getCameraTracking()).addActor(oneSpriteStaticActor);
         }
