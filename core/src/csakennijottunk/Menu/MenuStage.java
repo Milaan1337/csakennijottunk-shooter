@@ -12,12 +12,14 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class MenuStage extends MyStage {
     ExitBUtton exitBUtton;
     StartButton startButton;
     CreditButton creditButton;
     BearActor bearActor;
+
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         setCameraResetToCenterOfScreen();
@@ -28,9 +30,6 @@ public class MenuStage extends MyStage {
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-        bearActor = new BearActor(game);
-        bearActor.setX(400);
-        addActor(bearActor);
 
         setCameraTracking(new CameraTrackingToActors());
         RandomXS128 r = new RandomXS128();

@@ -5,6 +5,8 @@ import com.badlogic.gdx.files.FileHandle;
 
 import csakennijottunk.Game.GrassActor;
 import csakennijottunk.Game.PlayerActor;
+import csakennijottunk.Game.TreeActor;
+import csakennijottunk.Game.TreeActor2;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 
@@ -55,13 +57,21 @@ public class Level {
                 switch (levelarray[x][y]){
                     case 'o':
                         MyActor m = new GrassActor(stage.game);
-                        m.setPosition(x*30, y*50);
+                        m.setPosition(x*30, y*30);
+                        m.setZIndex(5);
                         stage.addActor(m);
                         break;
                     case 'x':
-                        MyActor d = new GrassActor(stage.game);
-                        d.setPosition(x*30, y*50);
+                        MyActor d = new TreeActor(stage.game);
+                        d.setPosition(x*50, y * 30);
                         stage.addActor(d);
+                        d.setZIndex(4);
+                        break;
+                    case 't':
+                        MyActor t = new TreeActor2(stage.game);
+                        t.setPosition(x*30, y*20);
+                        stage.addActor(t);
+                        t.setZIndex(2);
                         break;
                 }
             }
