@@ -24,7 +24,6 @@ public class GameStage extends MyStage {
         setCameraResetToCenterOfScreen();
         playerActor = new PlayerActor(game);
         addActor(playerActor);
-        playerActor.setZIndex(3);
         backButton = new BackButton(game);
         backButton.setPosition(0, 451);
         addActor(backButton);
@@ -35,11 +34,6 @@ public class GameStage extends MyStage {
         BgActor.setHeight(501);
         Level level = new Level(1,this);
         level.build();
-
-        bearActor = new BearActor(game);
-        bearActor.setX(450);
-        addActor(bearActor);
-
 
 
         addListener(clickListener = new ClickListener(){
@@ -52,10 +46,10 @@ public class GameStage extends MyStage {
 
     }
 
-    public void act(float delta){
+    /*public void act(float delta){
         super.act(delta);
         if (SimpleOverlapsUtil.overlaps(bearActor, playerActor) == true){
             System.out.println("overlaps with medve");
         }
-    }
+    }*/
 }
