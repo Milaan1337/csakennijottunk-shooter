@@ -7,12 +7,14 @@ import csakennijottunk.Game.BearActor;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class MenuStage extends MyStage {
     ExitBUtton exitBUtton;
     StartButton startButton;
     CreditButton creditButton;
     BearActor bearActor;
+
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         setCameraResetToCenterOfScreen();
