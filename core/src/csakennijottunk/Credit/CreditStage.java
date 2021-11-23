@@ -16,6 +16,10 @@ public class CreditStage extends MyStage {
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getMyAssetManager().getFont("alegreyaregular.otf");
 
+        backButton = new BackButton(game);
+        backButton.setPosition(0, 0);
+        addActor(backButton);
+
 
 
         MyLabel label = new MyLabel(game, "Készítők:", labelStyle);
