@@ -17,12 +17,8 @@ public class Level {
     int width;
     int height;
     MyStage stage;
-    SimpleOverlapsUtil simpleOverlapsUtil;
-    BearActor bearActor;
-
     public Level(int id, MyStage stage) {
         this.stage =stage;
-        bearActor = new BearActor(stage.game);
         FileHandle f = Gdx.files.internal("Levels/" + id + ".txt");
         String[] lines = f.readString().split("\n");
         int max = 0;
@@ -68,6 +64,7 @@ public class Level {
                         stage.addActor(p);
                         break;
                     case 'm':
+                        MyActor bearActor = new BearActor(stage.game);
                         bearActor.setPosition(x*30, y*50);
                         stage.addActor(bearActor);
                         break;
