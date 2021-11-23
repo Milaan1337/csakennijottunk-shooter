@@ -9,11 +9,14 @@ import csakennijottunk.Level;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class GameStage extends MyStage {
     PlayerActor playerActor;
     ClickListener clickListener;
     BackButton backButton;
+    BearActor bearActor;
+    SimpleOverlapsUtil simpleOverlapsUtil;
     public GameStage(MyGame game) {
         super(new ResponseViewport(501), game);
         addBackButtonScreenBackByStackPopListener();
@@ -27,6 +30,12 @@ public class GameStage extends MyStage {
         Level level = new Level(1,this);
         level.build();
 
+        bearActor = new BearActor(game);
+        bearActor.setX(450);
+        addActor(bearActor);
+
+
+
         addListener(clickListener = new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -35,5 +44,12 @@ public class GameStage extends MyStage {
             }
         });
 
+    }
+
+    public void act(float delta){
+        super.act(delta);
+        if (SimpleOverlapsUtil.overlaps(bearActor, playerActor) == true){
+            System.out.println("overlaps with medve");
+        }
     }
 }
