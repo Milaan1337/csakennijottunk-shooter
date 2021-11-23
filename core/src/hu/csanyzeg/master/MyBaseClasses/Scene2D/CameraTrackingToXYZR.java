@@ -1,6 +1,7 @@
 package hu.csanyzeg.master.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class CameraTrackingToXYZR extends CameraTracking{
 
@@ -12,11 +13,12 @@ public class CameraTrackingToXYZR extends CameraTracking{
     private float cameraMoveSpeed = 20f;
     private float cameraZoomSpeed = 0.2f;
 
-
-    public CameraTrackingToXYZR(OrthographicCamera orthographicCamera) {
-        super(orthographicCamera);
+    public CameraTrackingToXYZR() {
     }
 
+    public CameraTrackingToXYZR(Stage stage) {
+        super(stage);
+    }
 
     public float getCameraMoveToX() {
         return cameraTargetX;

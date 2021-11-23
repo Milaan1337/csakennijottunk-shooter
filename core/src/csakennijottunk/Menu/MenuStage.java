@@ -1,11 +1,16 @@
 package csakennijottunk.Menu;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
+import com.badlogic.gdx.math.RandomXS128;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import csakennijottunk.Game.BearActor;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 
 public class MenuStage extends MyStage {
@@ -27,5 +32,29 @@ public class MenuStage extends MyStage {
         bearActor.setX(400);
         addActor(bearActor);
 
+        setCameraTracking(new CameraTrackingToActors());
+        RandomXS128 r = new RandomXS128();
+        for(int i = 0; i< 10; i++){
+            OneSpriteStaticActor oneSpriteStaticActor = new OneSpriteStaticActor(game, "fa.png"){
+                public float rx, ry;
+
+                @Override
+                public void init() {
+                    super.init();
+                    rx = r.nextFloat();
+                    ry = r.nextFloat();
+                }
+
+                @Override
+                public void act(float delta) {
+                    super.act(delta);
+                    setX(getX() + rx - 0.5f);
+                    setY(getY() + ry - 0.5f);
+                }
+            };
+            oneSpriteStaticActor.setSize(30,30);
+            oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2, getViewport().getWorldHeight() / 2);
+            addActor(oneSpriteStaticActor);
+        }
     }
 }
