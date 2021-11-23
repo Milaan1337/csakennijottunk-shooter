@@ -52,8 +52,8 @@ public class MenuStage extends MyStage {
                 }
             };
             oneSpriteStaticActor.setSize(30,30);
-            oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2, getViewport().getWorldHeight() / 2);
-            //oneSpriteStaticActor.setPosition(0,0);
+            //oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2, getViewport().getWorldHeight() / 2);
+            oneSpriteStaticActor.setPosition(200,100);
             addActor(oneSpriteStaticActor);
             ((CameraTrackingToActors)getCameraTracking()).addActor(oneSpriteStaticActor);
         }

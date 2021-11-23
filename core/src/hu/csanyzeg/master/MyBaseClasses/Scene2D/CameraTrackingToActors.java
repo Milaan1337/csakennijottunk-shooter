@@ -1,5 +1,7 @@
 package hu.csanyzeg.master.MyBaseClasses.Scene2D;
 
+import static java.lang.Math.max;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,7 +13,7 @@ public class CameraTrackingToActors extends CameraTracking {
     public float marginBottom = 0.2f;
     public float marginRight = 0.2f;
     public float marginTop = 0.2f;
-    public float zoomMax = 8;
+    public float zoomMin = 1f;
     public float zoomSpeed = 1;
     public float moveSpeed = 1;
 
@@ -57,6 +59,10 @@ public class CameraTrackingToActors extends CameraTracking {
                 }
             }
         }
-        System.out.println(" left: " + left + "  top: " + top + "  right: " + right + "  bottom: " + bottom);
+        //System.out.println(" left: " + left + "  top: " + top + "  right: " + right + "  bottom: " + bottom);
+        orthographicCamera.zoom = max(zoomMin, max((right - left) / stage.getViewport().getWorldWidth(), (top - bottom) / stage.getViewport().getWorldHeight()));
+        orthographicCamera.position.x = left + stage.getViewport().getWorldWidth() / 2 * orthographicCamera.zoom;
+        orthographicCamera.position.y = bottom  + stage.getViewport().getWorldHeight() / 2 * orthographicCamera.zoom;
+        //orthographicCamera.update();
     }
 }
