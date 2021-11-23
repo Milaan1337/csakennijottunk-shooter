@@ -15,6 +15,7 @@ public class GameStage extends MyStage {
     PlayerActor playerActor;
     ClickListener clickListener;
     BackButton backButton;
+    BgActor BgActor;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
     public GameStage(MyGame game) {
@@ -23,17 +24,21 @@ public class GameStage extends MyStage {
         setCameraResetToCenterOfScreen();
         playerActor = new PlayerActor(game);
         addActor(playerActor);
+        playerActor.setZIndex(3);
         backButton = new BackButton(game);
         backButton.setPosition(0, 451);
         addActor(backButton);
+        BgActor = new BgActor(game);
+        addActor(BgActor);
+        BgActor.setZIndex(1);
+        BgActor.setWidth(501);
+        BgActor.setHeight(501);
         Level level = new Level(1,this);
         level.build();
 
         bearActor = new BearActor(game);
         bearActor.setX(450);
         addActor(bearActor);
-
-
 
 
 

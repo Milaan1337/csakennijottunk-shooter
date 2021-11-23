@@ -25,9 +25,6 @@ public class MenuStage extends MyStage {
         addActor(startButton);
         creditButton = new CreditButton(game);
         addActor(creditButton);
-        bearActor = new BearActor(game);
-        bearActor.setX(400);
-        addActor(bearActor);
 
     }
 }
