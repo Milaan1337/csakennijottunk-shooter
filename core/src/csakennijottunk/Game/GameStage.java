@@ -19,6 +19,7 @@ public class GameStage extends MyStage {
     BgActor BgActor;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
+    RestartButton restartButton;
 
     public Actor getActor(Class c){
         for (Actor a: getActors()) {
@@ -57,12 +58,19 @@ public class GameStage extends MyStage {
 
     }
 
+    public void GameOver(){
+        addActor(restartButton = new RestartButton(game));
+
+    }
+
     public void act(float delta){
         super.act(delta);
         for (Actor a: getActors()) {
             if (a instanceof BearActor){
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
                     System.out.println("overlaps with medve");
+                    GameOver();
+
 
                 }
             }
