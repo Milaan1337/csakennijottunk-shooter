@@ -49,6 +49,8 @@ public class GameStage extends MyStage {
         Level level = new Level(1,this);
         level.build();
 
+        bearActor = (BearActor) getActor(BearActor.class);
+
         playerActor = (PlayerActor) getActor(PlayerActor.class);
         setCameraTracking(new CameraTrackingToActors());
         ((CameraTrackingToActors)getCameraTracking()).addActor(playerActor);
@@ -66,8 +68,11 @@ public class GameStage extends MyStage {
     public void GameOver(){
         addActor(restartButton = new RestartButton(game));
         playerActor.isMoving = false;
-        /*bearActor.isMoving = false;*/
+        bearActor.stop();
+        bearActor.isMoving = false;
+        System.out.println("gameover");
         gameOver = true;
+
 
     }
 
@@ -76,7 +81,6 @@ public class GameStage extends MyStage {
         for (Actor a: getActors()) {
             if (a instanceof BearActor){
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
-                    System.out.println("overlaps with medve");
                     if (gameOver == false){
                         GameOver();
                     }
