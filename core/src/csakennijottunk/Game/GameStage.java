@@ -38,7 +38,7 @@ public class GameStage extends MyStage {
         setCameraResetToCenterOfScreen();
         BgActor = new BgActor(game);
         BgActor.setZIndex(1);
-        BgActor.setWidth(500);
+        BgActor.setWidth(700);
         BgActor.setHeight(500);
         addActor(BgActor);
         backButton = new BackToMenuButton(game);

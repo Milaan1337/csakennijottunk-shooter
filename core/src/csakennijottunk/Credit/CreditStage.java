@@ -9,6 +9,7 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class CreditStage extends MyStage {
     BackButton backButton;
+    CreditActor creditActor;
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500),game);
         setCameraResetToCenterOfScreen();
@@ -20,7 +21,11 @@ public class CreditStage extends MyStage {
         backButton.setPosition(0, 0);
         addActor(backButton);
 
-
+        creditActor = new CreditActor(game);
+        addActor(creditActor);
+        creditActor.setSize(1000,500);
+        creditActor.setZIndex(1);
+        creditActor.setPosition(-200,0);
 
         MyLabel label = new MyLabel(game, "Készítők:", labelStyle);
         label.setFontScale(0.5f);
