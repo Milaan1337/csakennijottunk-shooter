@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import csakennijottunk.Credit.BackButton;
 import csakennijottunk.Level;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTracking;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
@@ -15,7 +17,7 @@ import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 public class GameStage extends MyStage {
     PlayerActor playerActor = null;
     ClickListener clickListener;
-    BackButton backButton;
+    BackToMenuButton backButton;
     BgActor BgActor;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
@@ -39,7 +41,7 @@ public class GameStage extends MyStage {
         BgActor.setWidth(500);
         BgActor.setHeight(500);
         addActor(BgActor);
-        backButton = new BackButton(game);
+        backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 450);
         addActor(backButton);
 
@@ -47,6 +49,8 @@ public class GameStage extends MyStage {
         level.build();
 
         playerActor = (PlayerActor) getActor(PlayerActor.class);
+        setCameraTracking(new CameraTrackingToActors());
+        ((CameraTrackingToActors)getCameraTracking()).addActor(playerActor);
 
         addListener(clickListener = new ClickListener(){
             @Override
