@@ -17,15 +17,15 @@ public class CreditStage extends MyStage {
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getMyAssetManager().getFont("alegreyaregular.otf");
 
+        creditActor = new CreditActor(game);
+        addActor(creditActor);
+        creditActor.setSize(888.8888888888889f,500);
+        creditActor.setZIndex(1);
+        creditActor.setPosition(-194,0);
+
         backButton = new BackButton(game);
         backButton.setPosition(0, 0);
         addActor(backButton);
-
-        creditActor = new CreditActor(game);
-        addActor(creditActor);
-        creditActor.setSize(1000,500);
-        creditActor.setZIndex(1);
-        creditActor.setPosition(-200,0);
 
         MyLabel label = new MyLabel(game, "Készítők:", labelStyle);
         label.setFontScale(0.5f);
