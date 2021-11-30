@@ -15,7 +15,7 @@ import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 public class GameStage extends MyStage {
     PlayerActor playerActor = null;
     ClickListener clickListener;
-    BackButton backButton;
+    BackToMenuButton backButton;
     BgActor BgActor;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
@@ -39,7 +39,7 @@ public class GameStage extends MyStage {
         BgActor.setWidth(500);
         BgActor.setHeight(500);
         addActor(BgActor);
-        backButton = new BackButton(game);
+        backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 450);
         addActor(backButton);
 
