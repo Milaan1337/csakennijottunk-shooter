@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import csakennijottunk.Credit.BackButton;
 import csakennijottunk.Level;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTracking;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
@@ -47,6 +49,8 @@ public class GameStage extends MyStage {
         level.build();
 
         playerActor = (PlayerActor) getActor(PlayerActor.class);
+        setCameraTracking(new CameraTrackingToActors());
+        ((CameraTrackingToActors)getCameraTracking()).addActor(playerActor);
 
         addListener(clickListener = new ClickListener(){
             @Override
