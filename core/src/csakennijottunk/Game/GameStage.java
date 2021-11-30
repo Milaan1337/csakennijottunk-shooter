@@ -22,6 +22,7 @@ public class GameStage extends MyStage {
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
     RestartButton restartButton;
+    boolean gameOver = false;
 
     public Actor getActor(Class c){
         for (Actor a: getActors()) {
@@ -64,6 +65,9 @@ public class GameStage extends MyStage {
 
     public void GameOver(){
         addActor(restartButton = new RestartButton(game));
+        playerActor.isMoving = false;
+        /*bearActor.isMoving = false;*/
+        gameOver = true;
 
     }
 
@@ -73,8 +77,9 @@ public class GameStage extends MyStage {
             if (a instanceof BearActor){
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
                     System.out.println("overlaps with medve");
-                    GameOver();
-
+                    if (gameOver == false){
+                        GameOver();
+                    }
 
                 }
             }

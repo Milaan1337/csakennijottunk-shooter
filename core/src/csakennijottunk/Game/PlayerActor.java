@@ -9,6 +9,7 @@ public class PlayerActor extends OneSpriteStaticActor {
     boolean isJumping = false;
     float oldPos;
     boolean isFalling;
+    boolean isMoving = true;
     public PlayerActor(MyGame game){
         super(game, "green.png");
         this.setWidth(200);
@@ -32,7 +33,9 @@ public class PlayerActor extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        this.setX(this.getX() + 1);
+        if (isMoving == true){
+            this.setX(this.getX() + 1);
+        }
         if (isJumping == true){
             System.out.println("isJumping jó");
             float currentPos = this.getY();
