@@ -15,6 +15,7 @@ import csakennijottunk.Credit.CreditScreen;
 import csakennijottunk.Game.BearActor;
 import csakennijottunk.Game.GameScreen;
 import csakennijottunk.Game.MenuBackground;
+import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -28,6 +29,11 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 public class MenuStage extends MyStage {
     MenuBackground background;
     ClickListener c1;
+    static AssetList assetList = new AssetList();
+    static {
+        assetList.addFont("appopaint.otf", 72);
+        //assetList.add(MyGoodActor.assetlist);
+    }
 
 
     public MenuStage(MyGame game) {
@@ -42,7 +48,7 @@ public class MenuStage extends MyStage {
         labelStyle.fontColor = Color.BLACK;
 
         MyLabel startLabel = new MyLabel(game, "Start", labelStyle);
-        startLabel.setFontScale(2);
+        //startLabel.setFontScale(2);
         startLabel.setPosition(340, 280);
         startLabel.setHeight(105);
         startLabel.setWidth(275);
@@ -50,7 +56,7 @@ public class MenuStage extends MyStage {
         addActor(startLabel);
 
         MyLabel creditLabel = new MyLabel(game, "Credit", labelStyle);
-        creditLabel.setFontScale(2);
+        //creditLabel.setFontScale(2);
         creditLabel.setPosition(345, 145);
         creditLabel.setHeight(110);
         creditLabel.setWidth(270);
@@ -58,7 +64,7 @@ public class MenuStage extends MyStage {
         addActor(creditLabel);
 
         MyLabel exitLabel = new MyLabel(game, "Exit", labelStyle);
-        exitLabel.setFontScale(2);
+        //exitLabel.setFontScale(2);
         exitLabel.setPosition(340, 0);
         exitLabel.setHeight(95);
         exitLabel.setWidth(280);

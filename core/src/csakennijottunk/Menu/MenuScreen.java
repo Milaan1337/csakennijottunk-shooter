@@ -11,7 +11,9 @@ public class MenuScreen extends MyScreen {
 
     @Override
     public AssetList getAssetList() {
-        return null;
+        AssetList assetList = new AssetList();
+        assetList.add(MenuStage.assetList);
+        return assetList;
     }
 
     @Override
