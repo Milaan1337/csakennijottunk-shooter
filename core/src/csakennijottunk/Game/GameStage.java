@@ -18,7 +18,7 @@ public class GameStage extends MyStage {
     PlayerActor playerActor = null;
     ClickListener clickListener;
     BackToMenuButton backButton;
-    BgActor BgActor;
+    BgActor bgActor;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
     RestartButton restartButton;
@@ -37,11 +37,11 @@ public class GameStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListener();
         setCameraResetToCenterOfScreen();
-        BgActor = new BgActor(game);
-        BgActor.setZIndex(1);
-        BgActor.setWidth(700);
-        BgActor.setHeight(500);
-        addActor(BgActor);
+        bgActor = new BgActor(game);
+        bgActor.setZIndex(1);
+        bgActor.setWidth(700);
+        bgActor.setHeight(500);
+        addActor(bgActor);
         backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 450);
         addActor(backButton);
@@ -71,7 +71,11 @@ public class GameStage extends MyStage {
         bearActor.stop();
         bearActor.isMoving = false;
         System.out.println("gameover");
+        bgActor.isMoving = false;
         gameOver = true;
+
+
+
 
 
     }
