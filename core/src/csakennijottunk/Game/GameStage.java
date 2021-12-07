@@ -128,6 +128,11 @@ public class GameStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 isBowInHand = !getState();
+                if (getState() == true){
+                    playerActor.isMoving = false;
+                }else{
+                    playerActor.isMoving = true;
+                }
             }
         });
 
@@ -139,7 +144,7 @@ public class GameStage extends MyStage {
                     fisherManActor.set_angle(heightToDegree(y));
                     fisherManActor.set_speed(widthToSpeed(x));
                     generateFlying();
-                    GameOver();
+                    playerActor.isMoving = false;
                 }
             }
 
