@@ -34,7 +34,7 @@ public class PlayerActor extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         if (isMoving == true){
-            this.setX(this.getX() + 1);
+            this.setX(this.getX() + 3);
         }
         if (isJumping == true){
             System.out.println("isJumping jó");
@@ -56,6 +56,7 @@ public class PlayerActor extends OneSpriteStaticActor {
                 this.setY(this.getY() - 15);
                 System.out.println("Y:" + this.getY());
                 if (currentPos <= 45){
+                    System.out.println(currentPos);
                     isFalling = false;
                 }
             }
