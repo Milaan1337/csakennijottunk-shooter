@@ -1,5 +1,6 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -112,7 +113,12 @@ public class GameStage extends MyStage {
 
         playerActor = (PlayerActor) getActor(PlayerActor.class);
         setCameraTracking(new CameraTrackingToActors());
+        ((OrthographicCamera)getCamera()).zoom = 0.1f;
         ((CameraTrackingToActors)getCameraTracking()).addActor(playerActor);
+        ((CameraTrackingToActors)getCameraTracking()).marginLeft = 0.1f;
+        ((CameraTrackingToActors)getCameraTracking()).marginRight = 0.7f;
+        ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.5f;
+        ((CameraTrackingToActors)getCameraTracking()).zoomSpeed = 0.05f;
 
         addListener(clickListener = new ClickListener(){
             @Override
@@ -153,6 +159,7 @@ public class GameStage extends MyStage {
                 super.touchUp(event, x, y, pointer, button);
                 if (isBowInHand == true) {
                     addActor(fishFoodActor = new FishFoodActor(game, new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y), 120));
+                    //((CameraTrackingToActors)getCameraTracking()).addActor(fishFoodActor);
                 }
             }
         });

@@ -112,8 +112,8 @@ public class MenuStage extends MyStage {
 
 
 
-        /*setCameraTracking(new CameraTrackingToActors());
-        RandomXS128 r = new RandomXS128();
+        setCameraTracking(new CameraTrackingToActors());
+        /*RandomXS128 r = new RandomXS128();
         for(int i = 0; i< 10; i++){
             OneSpriteStaticActor oneSpriteStaticActor = new OneSpriteStaticActor(game, "fa.png"){
                 public float rx, ry;
@@ -121,15 +121,17 @@ public class MenuStage extends MyStage {
                 @Override
                 public void init() {
                     super.init();
-                    rx = r.nextFloat() * 3;
-                    ry = r.nextFloat() * 3;
+                    rx = r.nextFloat() * 2 - 1;
+                    ry = r.nextFloat() * 2 - 1;
+                    //rx= 0;
+                    //ry = -1;
                 }
 
                 @Override
                 public void act(float delta) {
                     super.act(delta);
-                    setX(getX() + rx - 0.5f);
-                    setY(getY() + ry - 0.5f);
+                    setX(getX() + rx);
+                    setY(getY() + ry);
                 }
             };
             oneSpriteStaticActor.setSize(30,30);
@@ -137,6 +139,7 @@ public class MenuStage extends MyStage {
             //oneSpriteStaticActor.setPosition(200,100);
             addActor(oneSpriteStaticActor);
             ((CameraTrackingToActors)getCameraTracking()).addActor(oneSpriteStaticActor);
+
         }*/
     }
 }
