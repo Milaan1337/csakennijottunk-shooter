@@ -178,6 +178,7 @@ public class GameStage extends MyStage {
         System.out.println("gameover");
         bgActor.isMoving = false;
         backButton.isMoving = false;
+        weaponChange.isMoving = false;
         gameOver = true;
     }
     public boolean getState(){

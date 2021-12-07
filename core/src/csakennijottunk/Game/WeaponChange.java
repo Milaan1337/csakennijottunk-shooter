@@ -9,9 +9,20 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class WeaponChange extends OneSpriteStaticActor {
     ClickListener k1;
+    boolean isMoving = true;
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (isMoving == true){
+            this.setX(this.getX()+3);
+        }
+    }
+
     public WeaponChange(MyGame game) {
         super(game, "green.png");
         this.setSize(100,100);
+
         this.addListener(k1 = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
