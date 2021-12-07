@@ -27,6 +27,7 @@ public class GameStage extends MyStage {
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
     RestartButton restartButton;
+    WeaponChange weaponChange;
     FisherManGroup fisherManActor;
     ChangeActor changeActor;
     FishFoodActor fishFoodActor;
@@ -78,8 +79,12 @@ public class GameStage extends MyStage {
         bgActor.setHeight(500);
         addActor(bgActor);
         backButton = new BackToMenuButton(game);
-        backButton.setPosition(0, 450);
+        backButton.setPosition(0, 300);
         addActor(backButton);
+
+        weaponChange = new WeaponChange(game);
+        weaponChange.setPosition(200, 200);
+        addActor(weaponChange);
 
         Level level = new Level(1,this);
         level.build();
@@ -137,6 +142,7 @@ public class GameStage extends MyStage {
         bearActor.isMoving = false;
         System.out.println("gameover");
         bgActor.isMoving = false;
+        backButton.isMoving = false;
         gameOver = true;
 
 
