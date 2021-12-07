@@ -7,24 +7,11 @@ import csakennijottunk.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class BackToMenuButton extends OneSpriteStaticActor {
-    ClickListener c1;
-    boolean isMoving = true;
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        if (isMoving == true) {
-            this.setX(this.getX() + 1);
-        }
-    }
-
-    public BackToMenuButton(MyGame game) {
-        super(game, "BackButton.png");
-        this.setSize(50, 50);
-        this.setPosition(0, 0);
-
-        this.addListener(c1 = new ClickListener() {
+public class WeaponChange extends OneSpriteStaticActor {
+    ClickListener k1;
+    public WeaponChange(MyGame game) {
+        super(game, "green.png");
+        this.addListener(k1 = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
