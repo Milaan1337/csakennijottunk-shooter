@@ -5,12 +5,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import csakennijottunk.Credit.BackButton;
 import csakennijottunk.Level;
 import hu.csanyzeg.master.Math.Ballistics2;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTracking;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
@@ -31,6 +34,10 @@ public class GameStage extends MyStage {
     FisherManGroup fisherManActor;
     ChangeActor changeActor;
     FishFoodActor fishFoodActor;
+    PlayerLife life1;
+    PlayerLife life2;
+    PlayerLife life3;
+    int playerLife = 3;
     boolean gameOver = false;
 
     public void generateFlying(){
@@ -89,6 +96,18 @@ public class GameStage extends MyStage {
         Level level = new Level(1,this);
         level.build();
 
+        life1 = new PlayerLife(game);
+        life1.setPosition(450, 0);
+        addActor(life1);
+
+        life2 = new PlayerLife(game);
+        life2.setPosition(450, 0);
+        addActor(life2);
+
+        life3 = new PlayerLife(game);
+        life3.setPosition(450, 0);
+        addActor(life3);
+
         bearActor = (BearActor) getActor(BearActor.class);
 
         playerActor = (PlayerActor) getActor(PlayerActor.class);
@@ -145,8 +164,10 @@ public class GameStage extends MyStage {
     public void GameOver(){
         addActor(restartButton = new RestartButton(game));
         playerActor.isMoving = false;
-        bearActor.stop();
-        bearActor.isMoving = false;
+        if (bearActor != null){
+            bearActor.stop();
+            bearActor.isMoving = false;
+        }
         System.out.println("gameover");
         bgActor.isMoving = false;
         backButton.isMoving = false;
@@ -163,6 +184,33 @@ public class GameStage extends MyStage {
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
                     if (gameOver == false){
                         GameOver();
+                    }
+
+                }
+            }
+        }
+        for (Actor a: getActors()) {
+            if (a instanceof TreeActor){
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+                    if (playerLife == 1) {
+                        playerLife = playerLife - 1;
+                        a.remove();
+                        life1.remove();
+                        if (gameOver == false){
+                            GameOver();
+                        }
+                    }
+                    if (playerLife == 2){
+                        playerLife = playerLife - 1;
+                        a.remove();
+                        life2.remove();
+
+                    }
+                    if (playerLife == 3){
+                        playerLife = playerLife - 1;
+                        a.remove();
+                        life3.remove();
+
                     }
 
                 }
