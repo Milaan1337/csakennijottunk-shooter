@@ -11,12 +11,12 @@ public class WeaponChange extends OneSpriteStaticActor {
     ClickListener k1;
     public WeaponChange(MyGame game) {
         super(game, "green.png");
+        this.setSize(100,100);
         this.addListener(k1 = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.getMyAssetManager().getSound("click.mp3").play();
-                game.setScreen(new MenuScreen(game));
 
             }
         });

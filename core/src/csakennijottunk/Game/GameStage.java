@@ -19,7 +19,7 @@ import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 public class GameStage extends MyStage {
     public Vector2 fisherMan = new Vector2(200, 190);
     public Vector2 fishingRod = new Vector2(10, 10);
-    boolean isBowInHand = true;
+    boolean isBowInHand = false;
     PlayerActor playerActor = null;
     ClickListener clickListener;
     BackToMenuButton backButton;
@@ -104,6 +104,13 @@ public class GameStage extends MyStage {
                 }
             }
         });
+        weaponChange.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                isBowInHand = !getState();
+            }
+        });
 
         addListener(new ClickListener(){
             @Override
@@ -144,11 +151,9 @@ public class GameStage extends MyStage {
         bgActor.isMoving = false;
         backButton.isMoving = false;
         gameOver = true;
-
-
-
-
-
+    }
+    public boolean getState(){
+        return isBowInHand;
     }
 
     public void act(float delta){
