@@ -39,7 +39,7 @@ public class Ballistics2 {
      * @param x
      * @return
      */
-    protected float getY(float x) {
+    public float getY(float x) {
         x -= x0;
         return (float) ((x) * Math.tan(a0) - (g / (2 * v0 * v0 * Math.cos(a0) * Math.cos(a0))) * (x) * (x)) + y0;
     }
@@ -51,7 +51,7 @@ public class Ballistics2 {
      * @param y
      * @return
      */
-    protected float[] getX(float y) {
+    public float[] getX(float y) {
         y -= y0;
         return new float[]
                 {
@@ -104,7 +104,6 @@ public class Ballistics2 {
 
     /**
      * Az eltelt időt adja vissza az x pozíció függvényében
-     * @param x A vízzintes pozíció
      * @return A pozícióig eltelt idő
      */
     public float[] getElapsedTimeFromY(float y){
@@ -136,5 +135,25 @@ public class Ballistics2 {
                 ",\nkiinduló szög a0 = " + a0 +
                 ",\ngravitációs gyorsulás g = " + g +
                 "\n}";
+    }
+
+    public float getV0() {
+        return v0;
+    }
+
+    public float getX0() {
+        return x0;
+    }
+
+    public float getY0() {
+        return y0;
+    }
+
+    public float getA0() {
+        return a0;
+    }
+
+    public float getG() {
+        return g;
     }
 }

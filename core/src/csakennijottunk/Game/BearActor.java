@@ -11,13 +11,6 @@ public class BearActor extends OneSpriteAnimatedActor {
     public BearActor(MyGame game) {
         super(game, "bear.atlas");
         setFps(20);
-        addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                stop();
-            }
-        });
     }
 
     public void act(float delta){
