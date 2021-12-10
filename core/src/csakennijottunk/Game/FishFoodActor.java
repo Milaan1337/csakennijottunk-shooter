@@ -7,6 +7,6 @@ public class FishFoodActor extends BallisticActor {
 
     public FishFoodActor(MyGame game, Ballistics2 ballistics, float waterHeight) {
         super(game, "Arrow.png", ballistics, waterHeight);
-        setSize(100,100);
+        setSize(30,30);
     }
 }
