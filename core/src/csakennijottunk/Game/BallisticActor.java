@@ -22,6 +22,7 @@ public class BallisticActor extends OneSpriteStaticActor {
     protected Vector2 startpoint;
     protected float falltime;
     protected OnStopListener onStopListener = null;
+    float max = 0;
 
     public BallisticActor(MyGame game, String hash, Ballistics2 ballistics, float waterHeight) {
         super(game, hash);
@@ -37,7 +38,13 @@ public class BallisticActor extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         if (flying) {
-            rotateBy(delta * 300);
+            if (max < this.getY()) {
+                this.setRotation(ballistics2.getY(this.getX()));
+                max = ballistics2.getY(this.getX());
+            }else{
+                this.setRotation(-(ballistics2.getY(this.getX())));
+                max = ballistics2.getY(this.getX());
+            }
             if (getX() + getWidth() / 2 < ballistics2.getX(waterHeight)[1]) {
                 setPosition(ballistics2.getPosition(getElapsedTime() * speed).x - getWidth() / 2, ballistics2.getPosition(getElapsedTime() * speed).y - getHeight() / 2);
             } else {

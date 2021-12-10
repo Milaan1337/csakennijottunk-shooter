@@ -37,7 +37,6 @@ public class PlayerActor extends OneSpriteAnimatedActor {
     public void act(float delta) {
         super.act(delta);
         float currentPos = this.getY();
-        System.out.println(currentPos);
         if (isMoving == true){
             this.setX(this.getX() + 3);
         }
@@ -59,10 +58,8 @@ public class PlayerActor extends OneSpriteAnimatedActor {
         if (isFalling == true){
             if (currentPos <= 501-this.getHeight() + 9 && currentPos >= 0) {
                 this.setY(this.getY() - 5);
-                System.out.println("Y:" + this.getY());
                 if (currentPos <= 45){
                     this.setY(30);
-                    System.out.println(currentPos);
                     isFalling = false;
                 }
             }
