@@ -11,14 +11,6 @@ public class WeaponChange extends OneSpriteStaticActor {
     ClickListener k1;
     boolean isMoving = true;
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        if (isMoving == true){
-            this.setX(this.getX()+3);
-        }
-    }
-
     public WeaponChange(MyGame game) {
         super(game, "green.png");
         this.setSize(100,100);

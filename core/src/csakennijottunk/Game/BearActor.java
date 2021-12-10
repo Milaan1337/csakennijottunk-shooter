@@ -12,11 +12,4 @@ public class BearActor extends OneSpriteAnimatedActor {
         super(game, "bear.atlas");
         setFps(20);
     }
-
-    public void act(float delta){
-        super.act(delta);
-        if (isMoving == true){
-            this.setX(this.getX() - 2);
-        }
-    }
 }
