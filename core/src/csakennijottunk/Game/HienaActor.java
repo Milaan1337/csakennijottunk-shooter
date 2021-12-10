@@ -6,10 +6,9 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class HienaActor extends OneSpriteAnimatedActor {
     boolean isMoving = true;
+
     public HienaActor(MyGame game) {
         super(game, "HyenaSprite.atlas");
-        this.setFps(20);
-        this.setSize(80,40);
     }
 
     @Override
