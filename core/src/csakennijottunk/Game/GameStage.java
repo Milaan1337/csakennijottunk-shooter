@@ -28,6 +28,7 @@ public class GameStage extends MyStage {
     ClickListener clickListener;
     BackToMenuButton backButton;
     BgActor bgActor;
+    BgActor bgActor2;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
     RestartButton restartButton;
@@ -38,8 +39,12 @@ public class GameStage extends MyStage {
     PlayerLife life1;
     PlayerLife life2;
     PlayerLife life3;
+    BowActor bowActor;
+    BowPulled bowPulled;
     int playerLife = 3;
     boolean gameOver = false;
+
+
 
     public void generateFlying(){
         ArrayList<Actor> actors = new ArrayList<Actor>();
@@ -51,17 +56,11 @@ public class GameStage extends MyStage {
         for (Actor a:actors) {
             getActors().removeValue(a, true);
         }
+
         Ballistics2 ballistics2 = new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y);
-        for(float x = fisherManActor.get_handEnd().x; x < getViewport().getWorldWidth(); x+=20) {
+        for(float x = fisherManActor.get_handEnd().x; x < playerActor.getX() + 700; x+=20) {
             addActor(new FlyActor(game, x, ballistics2.getY(x)));
         }
-    }
-
-    public Vector2 getFishingRodEnd(){
-        Vector2 fishingRodEnd = new Vector2(fishingRod);
-        fishingRodEnd.rotate(fisherManActor.degree);
-        fishingRodEnd.add(fisherMan);
-        return fishingRodEnd;
     }
 
     public Actor getActor(Class c){
@@ -75,23 +74,23 @@ public class GameStage extends MyStage {
 
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        fisherManActor = new FisherManGroup(game);
         addBackButtonScreenBackByStackPopListener();
         setCameraResetToCenterOfScreen();
         changeActor = new ChangeActor(game);
         changeActor.setZIndex(999999999);
         addActor(changeActor);
-        bgActor = new BgActor(game);
-        bgActor.setZIndex(1);
-        bgActor.setWidth(700);
-        bgActor.setHeight(500);
+
+        bgActor = new BgActor(game,-105);
         addActor(bgActor);
+
         backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 300);
         addActor(backButton);
 
         weaponChange = new WeaponChange(game);
-        weaponChange.setPosition(200, 200);
+        weaponChange.setPosition(400, 400);
+        weaponChange.setSize(100,100);
+        weaponChange.setZIndex(999999999);
         addActor(weaponChange);
 
         Level level = new Level(1,this);
@@ -109,18 +108,29 @@ public class GameStage extends MyStage {
         life3.setPosition(450, 0);
         addActor(life3);
 
-        bearActor = (BearActor) getActor(BearActor.class);
+        bowActor = new BowActor(game);
+        addActor(bowActor);
 
+        bearActor = (BearActor) getActor(BearActor.class);
         playerActor = (PlayerActor) getActor(PlayerActor.class);
         setCameraTracking(new CameraTrackingToActors());
         ((OrthographicCamera)getCamera()).zoom = 0.1f;
         ((CameraTrackingToActors)getCameraTracking()).addActor(playerActor);
         ((CameraTrackingToActors)getCameraTracking()).marginLeft = 0.1f;
         ((CameraTrackingToActors)getCameraTracking()).marginRight = 0.7f;
-        ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.5f;
         ((CameraTrackingToActors)getCameraTracking()).zoomSpeed = 0.05f;
+        if (bgActor.getStage() != null) {
+            for (int i = 1; i <= 100; i++) {
+                int count = (int) ((int) (-105 + (bgActor.getWidth()) * i));
 
-        addListener(clickListener = new ClickListener(){
+                bgActor2 = new BgActor(game,count);
+                addActor(bgActor2);
+                bgActor2.setZIndex(0);
+
+            }
+        }
+
+        playerActor.addListener(clickListener = new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -129,6 +139,19 @@ public class GameStage extends MyStage {
                 }
             }
         });
+        bowActor.addListener(clickListener = new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (playerActor.isMoving == true) {
+                    playerActor.jump();
+                }
+            }
+        });
+
+        if (playerActor.getStage() != null) {
+            fisherManActor = new FisherManGroup(game, playerActor.getX(), playerActor.getY(), playerActor.getX() - 15, playerActor.getY() - 15, playerActor.getX() - 30, playerActor.getY());
+        }
         weaponChange.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -136,8 +159,16 @@ public class GameStage extends MyStage {
                 isBowInHand = !getState();
                 if (getState() == true){
                     playerActor.isMoving = false;
+                    playerActor.setFps(0);
                 }else{
                     playerActor.isMoving = true;
+                    playerActor.setFps(20);
+                    ArrayList<Actor> actors = new ArrayList<Actor>();
+                    for (Actor a:getActors()) {
+                        if (a instanceof FlyActor){
+                            a.remove();
+                        }
+                    }
                 }
             }
         });
@@ -149,6 +180,7 @@ public class GameStage extends MyStage {
                 if (isBowInHand == true) {
                     fisherManActor.set_angle(heightToDegree(y));
                     fisherManActor.set_speed(widthToSpeed(x));
+                    fisherManActor.setPos(playerActor.getX() + playerActor.getWidth() / 2,playerActor.getY() + playerActor.getHeight() / 2);
                     generateFlying();
                     playerActor.isMoving = false;
                 }
@@ -159,6 +191,7 @@ public class GameStage extends MyStage {
                 super.touchUp(event, x, y, pointer, button);
                 if (isBowInHand == true) {
                     addActor(fishFoodActor = new FishFoodActor(game, new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y), 120));
+
                     //((CameraTrackingToActors)getCameraTracking()).addActor(fishFoodActor);
                 }
             }
@@ -183,7 +216,6 @@ public class GameStage extends MyStage {
             bearActor.isMoving = false;
         }
         System.out.println("gameover");
-        bgActor.isMoving = false;
         backButton.isMoving = false;
         weaponChange.isMoving = false;
         gameOver = true;
@@ -192,36 +224,41 @@ public class GameStage extends MyStage {
         return isBowInHand;
     }
 
-    public void act(float delta){
+    public void act(float delta) {
         super.act(delta);
-        for (Actor a: getActors()) {
-            if (a instanceof BearActor){
-                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
-                    if (gameOver == false){
+        for (Actor a : getActors()) {
+            if (a instanceof BearActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
+                    if (gameOver == false) {
                         GameOver();
                     }
 
                 }
             }
+            if (a instanceof TreeActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
+                    GameOver();
+                }
+            }
         }
-        for (Actor a: getActors()) {
-            if (a instanceof TreeActor){
-                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+        for (Actor a : getActors()) {
+            if (a instanceof TreeActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
                     if (playerLife == 1) {
                         playerLife = playerLife - 1;
                         a.remove();
                         life1.remove();
-                        if (gameOver == false){
+                        if (gameOver == false) {
                             GameOver();
                         }
                     }
-                    if (playerLife == 2){
+                    if (playerLife == 2) {
                         playerLife = playerLife - 1;
                         a.remove();
                         life2.remove();
 
                     }
-                    if (playerLife == 3){
+                    if (playerLife == 3) {
                         playerLife = playerLife - 1;
                         a.remove();
                         life3.remove();
@@ -230,7 +267,23 @@ public class GameStage extends MyStage {
 
                 }
             }
+            if (playerActor != null && weaponChange != null) {
+                weaponChange.setPosition(playerActor.getX() - 195, -30);
+            }
+            if (playerActor != null && backButton != null) {
+                backButton.setPosition(playerActor.getX() - 190, 410);
+
+            if (playerActor != null && restartButton != null) {
+                restartButton.setPosition(playerActor.getX() - 200, 350);
+                }
+            }
+        }
+        if (playerActor.getStage() != null && weaponChange.getStage() != null) {
+            weaponChange.setPosition(playerActor.getX() + 20,getHeight() - weaponChange.getHeight() - 25);
         }
 
+        if (playerActor.getStage() != null){
+            bowActor.setPosition(playerActor.getX() + playerActor.getWidth() / 2 - 10 - bowActor.getWidth()/2,playerActor.getY() + playerActor.getHeight() / 2 - bowActor.getHeight() / 2);
+        }
     }
 }

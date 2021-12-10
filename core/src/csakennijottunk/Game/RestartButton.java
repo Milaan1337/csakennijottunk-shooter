@@ -10,9 +10,10 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyButton;
 public class RestartButton extends OneSpriteStaticActor {
     ClickListener c1;
     public RestartButton(MyGame game) {
-        super(game, "badlogic.jpg");
+        super(game, "bear.png");
         this.setSize(50, 50);
         this.setPosition(250, 250);
+        this.setZIndex(999999999);
         this.addListener(c1 = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
