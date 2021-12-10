@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import csakennijottunk.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -67,6 +68,37 @@ public class GameStageForBUttons extends MyStage {
         loseLabel.setWidth(500);
         loseLabel.setAlignment(1);
         loseLabel.setText("Sajnos vesztettél, próbálkozz újra!");
+
+        backToMenuButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.getMyAssetManager().getSound("click.mp3").play();
+                if (loseLabel != null){
+                    loseLabel.remove();
+                }
+                if (emptyLife1 != null){
+                    emptyLife1.remove();
+                }
+                if (emptyLife2 != null){
+                    emptyLife2.remove();
+                }
+                if (emptyLife3 != null){
+                    emptyLife3.remove();
+                }
+                if (life1 != null){
+                    life1.remove();
+                }
+                if (life2 != null){
+                    life2.remove();
+                }
+                if (life3 != null){
+                    life3.remove();
+                }
+                game.setScreen(new MenuScreen(game));
+
+            }
+        });
 
 
 

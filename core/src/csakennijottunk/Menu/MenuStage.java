@@ -101,7 +101,7 @@ public class MenuStage extends MyStage {
                     @Override
                     public void onTick(OneTickTimer sender, float correction) {
                         super.onTick(sender, correction);
-                        game.setScreenBackByStackPop();
+                        System.exit(0);
                     }
                 }));
 
