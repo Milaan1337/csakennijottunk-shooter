@@ -327,10 +327,10 @@ public class GameStage extends MyStage {
 
         for (Actor a : getActors()) {
             if (a instanceof FishFoodActor) {
-                    if (SimpleOverlapsUtil.overlaps(a, bearActor) == true) {
-                        bearActor.remove();
-                        System.out.println("UTKOZESXDLOL");
-                    }
+                if (SimpleOverlapsUtil.overlaps(a, bearActor)){
+                    bearActor.remove();
+                    System.out.println("UTKOZESXDLOL");
+                }
             }
             if (a instanceof FishFoodActor) {
                     if (SimpleOverlapsUtil.overlaps(a, rabbitActor) == true) {
