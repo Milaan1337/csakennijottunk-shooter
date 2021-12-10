@@ -1,10 +1,12 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
+import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class GameStage extends MyStage {
     public Vector2 fisherMan = new Vector2(200, 190);
@@ -34,10 +37,12 @@ public class GameStage extends MyStage {
     ChangeActor changeActor;
     FishFoodActor fishFoodActor;
     RestartButton backButton2;
+    RabbitActor rabbitActor;
     PlayerLife life1;
     PlayerLife life2;
     PlayerLife life3;
     BowActor bowActor;
+    WolfActor wolfActor;
     BowPulled bowPulled;
     EmptyActor emptyActor;
     int playerLife = 3;
@@ -82,6 +87,7 @@ public class GameStage extends MyStage {
         bgActor = new BgActor(game,-105);
         addActor(bgActor);
 
+
         backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 300);
         addActor(backButton);
@@ -115,6 +121,10 @@ public class GameStage extends MyStage {
         backButton2 = new RestartButton(game);
         addActor(backButton2);
         //backButton2.setVisible(false);
+
+        rabbitActor = (RabbitActor)  getActor(RabbitActor.class);
+
+        wolfActor = (WolfActor)  getActor(WolfActor.class);
 
         bearActor = (BearActor) getActor(BearActor.class);
         playerActor = (PlayerActor) getActor(PlayerActor.class);
@@ -252,12 +262,17 @@ public class GameStage extends MyStage {
                     if (gameOver == false) {
                         GameOver();
                     }
-
-                }
             }
+        }
             if (a instanceof TreeActor) {
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
                     GameOver();
+                }
+            }
+            if (a instanceof RabbitActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
+                    GameOver();
+
                 }
             }
         }
@@ -316,6 +331,18 @@ public class GameStage extends MyStage {
                         bearActor.remove();
                         System.out.println("UTKOZESXDLOL");
                     }
+            }
+            if (a instanceof FishFoodActor) {
+                    if (SimpleOverlapsUtil.overlaps(a, rabbitActor) == true) {
+                        rabbitActor.remove();
+
+                }
+            }
+            if (a instanceof FishFoodActor) {
+                if (SimpleOverlapsUtil.overlaps(a, wolfActor) == true) {
+                    wolfActor.remove();
+
+                }
             }
         }
     }
