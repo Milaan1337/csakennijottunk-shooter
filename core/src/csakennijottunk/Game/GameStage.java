@@ -83,8 +83,9 @@ public class GameStage extends MyStage {
         addActor(changeActor);
         bgActor = new BgActor(game);
         bgActor.setZIndex(1);
-        bgActor.setWidth(700);
-        bgActor.setHeight(500);
+        bgActor.setWidth(1280);
+        bgActor.setHeight(1024);
+        bgActor.setPosition(-25,0);
         addActor(bgActor);
         backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 300);
@@ -183,7 +184,6 @@ public class GameStage extends MyStage {
             bearActor.isMoving = false;
         }
         System.out.println("gameover");
-        bgActor.isMoving = false;
         backButton.isMoving = false;
         weaponChange.isMoving = false;
         gameOver = true;
@@ -201,6 +201,11 @@ public class GameStage extends MyStage {
                         GameOver();
                     }
 
+                }
+            }
+            if (a instanceof TreeActor){
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+                    GameOver();
                 }
             }
         }
