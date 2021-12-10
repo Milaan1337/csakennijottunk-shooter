@@ -240,6 +240,12 @@ public class GameStage extends MyStage {
                     fishFoodActor = new FishFoodActor(game, new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y), 50);
                     //addActor(fishFoodActor = new FishFoodActor(game, new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y), 50));
                     addActor(fishFoodActor);
+                    fishFoodActor.setOnStopListener(new BallisticActor.OnStopListener() {
+                        @Override
+                        void stop(BallisticActor sender) {
+                            fishFoodActor.remove();
+                        }
+                    });
                     //((CameraTrackingToActors)getCameraTracking()).addActor(fishFoodActor);
                 }
             }
