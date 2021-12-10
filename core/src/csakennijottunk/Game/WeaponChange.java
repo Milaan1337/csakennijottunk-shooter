@@ -11,7 +11,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class WeaponChange extends OneSpriteStaticActor {
     ClickListener k1;
     PlayerActor playerActor;
-    boolean isMoving = true;
 
     public WeaponChange(MyGame game) {
         super(game, "Switchbutton.png");

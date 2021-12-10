@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import csakennijottunk.Game.BearActor;
 import csakennijottunk.Game.FoxActor;
 import csakennijottunk.Game.GrassActor;
+import csakennijottunk.Game.HienaActor;
 import csakennijottunk.Game.LionActor;
 import csakennijottunk.Game.PlayerActor;
 import csakennijottunk.Game.RabbitActor;
@@ -110,10 +111,15 @@ public class Level {
                         break;
                     case 'f':
                         MyActor f = new FoxActor(stage.game);
-                        f.setPosition(x*30, y*20);
+                        f.setPosition(x*120, y*30);
                         stage.addActor(f);
                         f.setZIndex(2);
                         break;
+                    case 'h':
+                        MyActor h = new HienaActor(stage.game);
+                        h.setPosition(x*80, y*40);
+                        stage.addActor(h);
+                        h.setZIndex(2);
                 }
             }
         }
