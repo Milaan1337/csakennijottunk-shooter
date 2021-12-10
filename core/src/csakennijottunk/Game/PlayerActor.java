@@ -37,21 +37,21 @@ public class PlayerActor extends OneSpriteAnimatedActor {
     public void act(float delta) {
         super.act(delta);
         float currentPos = this.getY();
+        System.out.println(currentPos + "Jelenlegi Y");
+        System.out.println((501 - this.getHeight() + 9)/2 + 5 + "AMI KÉNE");
         if (isMoving == true){
             this.setX(this.getX() + 3);
         }
         if (isJumping == true){
-            System.out.println("Jelenlegi pos" + this.getY());
-            System.out.println((501 - this.getHeight() + 9)/2 + "Ez a cél");
 
-            if (currentPos >= 30 && currentPos < (501 - this.getHeight() + 9)/2 + 7.5) {
+            if (currentPos >= 30 && currentPos < (501 - this.getHeight() + 9)/2 + 7.5 + 5) {
                 System.out.println("pos jó");
-                this.setY(this.getY() + 15);
+                this.setY(this.getY() + 10);
                 isFalling = false;
             }
         }
 
-        if (this.getY() == (501 - this.getHeight() + 9)/2 + 7.5){
+        if (this.getY() == (501 - this.getHeight() + 9)/2 + 7.5 + 5){
             fall();
         }
 

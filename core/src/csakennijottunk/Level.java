@@ -86,7 +86,7 @@ public class Level {
                         break;
                     case 'x':
                         MyActor d = new TreeActor(stage.game);
-                        d.setPosition(x*50, y * 30);
+                        d.setPosition(x*30, y * 30);
                         stage.addActor(d);
                         d.setZIndex(4);
                         break;
