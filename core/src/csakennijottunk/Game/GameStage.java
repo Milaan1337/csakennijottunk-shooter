@@ -43,7 +43,9 @@ public class GameStage extends MyStage {
     PlayerLife life3;
     BowActor bowActor;
     WolfActor wolfActor;
+    FoxActor foxActor;
     BowPulled bowPulled;
+    LionActor lionActor;
     EmptyActor emptyActor;
     int playerLife = 3;
     boolean gameOver = false;
@@ -87,6 +89,18 @@ public class GameStage extends MyStage {
         bgActor = new BgActor(game,-105);
         addActor(bgActor);
 
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = game.getMyAssetManager().getFont("appopaint.otf");
+        labelStyle.fontColor = Color.BLACK;
+
+        MyLabel loseLabel = new MyLabel(game, "Sajnos vesztettél, próbálkozz újra.", labelStyle);
+        //startLabel.setFontScale(2);
+        loseLabel.setPosition(150, 280);
+        loseLabel.setHeight(50);
+        loseLabel.setWidth(500);
+        loseLabel.setAlignment(1);
+        addActor(loseLabel);
+
 
         backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 300);
@@ -123,6 +137,10 @@ public class GameStage extends MyStage {
         //backButton2.setVisible(false);
 
         rabbitActor = (RabbitActor)  getActor(RabbitActor.class);
+
+        foxActor = (FoxActor)  getActor(FoxActor.class);
+
+        lionActor = (LionActor)  getActor(LionActor.class);
 
         wolfActor = (WolfActor)  getActor(WolfActor.class);
 
@@ -260,7 +278,7 @@ public class GameStage extends MyStage {
             if (a instanceof BearActor) {
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
                     if (gameOver == false) {
-                        GameOver();
+
                     }
             }
         }
@@ -341,6 +359,18 @@ public class GameStage extends MyStage {
             if (a instanceof FishFoodActor) {
                 if (SimpleOverlapsUtil.overlaps(a, wolfActor) == true) {
                     wolfActor.remove();
+
+                }
+            }
+            if (a instanceof FishFoodActor) {
+                if (SimpleOverlapsUtil.overlaps(a, lionActor) == true) {
+                    lionActor.remove();
+
+                }
+            }
+            if (a instanceof FishFoodActor) {
+                if (SimpleOverlapsUtil.overlaps(a, foxActor) == true) {
+                    foxActor.remove();
 
                 }
             }
