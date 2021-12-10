@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import csakennijottunk.Level;
 import hu.csanyzeg.master.Math.Ballistics2;
+import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -38,16 +39,16 @@ public class GameStage extends MyStage {
     BowPulled bowPulled;
     RabbitActor rabbitActor;
     LionActor lionActor;
-    MyLabel loseLabel;
     FoxActor foxActor;
     EmptyActor emptyActor;
     int playerLife = 3;
-    boolean gameOver = false;
+    public static boolean gameOver = false;
     public static boolean restartButtonVisible = false;
     public static boolean isLife1 = true;
     public static boolean isLife2 = true;
     public static boolean isLife3 = true;
     public static boolean isWeaponChange = false;
+
 
 
     public void generateFlying() {
@@ -83,18 +84,6 @@ public class GameStage extends MyStage {
 
         bgActor = new BgActor(game, -105);
         addActor(bgActor);
-
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = game.getMyAssetManager().getFont("appopaint.otf");
-        labelStyle.fontColor = Color.BLACK;
-
-        loseLabel = new MyLabel(game, "", labelStyle);
-        //startLabel.setFontScale(2);
-        loseLabel.setPosition(150, 280);
-        loseLabel.setHeight(50);
-        loseLabel.setWidth(500);
-        loseLabel.setAlignment(1);
-        addActor(loseLabel);
 
         Level level = new Level(1, this);
         level.build();
@@ -236,16 +225,19 @@ public class GameStage extends MyStage {
     public void GameOver() {
         restartButtonVisible = true;
         playerActor.isMoving = false;
-        loseLabel.setText("Sajnos vesztettél, próbálkozz újra!");
         if (bearActor != null) {
             playerActor.stop();
             if (bearActor != null) {
                 bearActor.stop();
                 bearActor.isMoving = false;
             }
-            System.out.println("gameover");
+            System.out.println("gameoverjoooo");
             gameOver = true;
         }
+    }
+
+    public void GameOverForOtherStage() {
+        GameOver();
     }
 
 
@@ -280,6 +272,7 @@ public class GameStage extends MyStage {
                             a.remove();
                             playerLife = playerLife - 1;
                             isLife1 = false;
+                            GameOver();
                         }
                         if (playerLife == 2) {
                             a.remove();

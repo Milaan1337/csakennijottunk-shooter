@@ -15,7 +15,7 @@ public class HienaActor extends OneSpriteAnimatedActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (isMoving == true ) {
+        if (isMoving == true) {
             this.setX(this.getX() - 1);
         }
     }

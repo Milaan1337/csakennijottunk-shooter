@@ -22,12 +22,13 @@ public class Level {
     int width;
     int height;
     MyStage stage;
+
     public Level(int id, MyStage stage) {
-        this.stage =stage;
+        this.stage = stage;
         FileHandle f = Gdx.files.internal("Levels/" + id + ".txt");
         String[] lines = f.readString().split("\n");
         int max = 0;
-        for (String s: lines) {
+        for (String s : lines) {
             if (s.length() > max) {
                 max = s.trim().length();
             }
@@ -44,14 +45,14 @@ public class Level {
         }
 
         for (int y = 0; y < lines.length; y++) {
-            for (int x = 0; x < lines[y].trim().length(); x++){
+            for (int x = 0; x < lines[y].trim().length(); x++) {
                 levelarray[x][y] = lines[y].charAt(x);
             }
         }
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                System.out.print((char)(levelarray[x][y] ));
+                System.out.print((char) (levelarray[x][y]));
             }
             System.out.println();
         }
@@ -59,70 +60,67 @@ public class Level {
     }
 
 
-    public void build(){
+    public void build() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                switch (levelarray[x][y]){
+                switch (levelarray[x][y]) {
                     case 'p':
                         MyActor p = new PlayerActor(stage.game);
-                        p.setPosition(x*30, 30);
+                        p.setPosition(x * 30, 30);
                         stage.addActor(p);
                         break;
                     case 'm':
                         MyActor bearActor = new BearActor(stage.game);
-                        bearActor.setPosition(x*30, y*50);
+                        bearActor.setPosition(x * 30, y * 50);
                         stage.addActor(bearActor);
                         break;
                     case 'o':
                         MyActor m = new GrassActor(stage.game);
-                        m.setPosition(x*30, y*30);
+                        m.setPosition(x * 30, y * 30);
                         m.setZIndex(5);
                         stage.addActor(m);
                         break;
                     case 'r':
                         MyActor r = new RabbitActor(stage.game);
-                        r.setPosition(x*30, y*30);
+                        r.setPosition(x * 30, y * 30);
                         r.setZIndex(5);
                         stage.addActor(r);
                         break;
                     case 'x':
                         MyActor d = new TreeActor(stage.game);
-                        d.setPosition(x*30, y * 30);
+                        d.setPosition(x * 30, y * 30);
                         stage.addActor(d);
                         d.setZIndex(4);
                         break;
                     case 'w':
                         MyActor w = new WolfActor(stage.game);
-                        w.setPosition(x*50, y * 30);
+                        w.setPosition(x * 50, y * 30);
                         stage.addActor(w);
                         w.setZIndex(4);
                         break;
                     case 't':
                         MyActor t = new TreeActor2(stage.game);
-                        t.setPosition(x*30, y*20);
+                        t.setPosition(x * 30, y * 20);
                         stage.addActor(t);
                         t.setZIndex(2);
                         break;
                     case 'l':
                         MyActor l = new LionActor(stage.game);
-                        l.setPosition(x*30, y*20);
+                        l.setPosition(x * 30, y * 20);
                         stage.addActor(l);
                         l.setZIndex(2);
                         break;
                     case 'f':
                         MyActor f = new FoxActor(stage.game);
-                        f.setPosition(x*120, y*30);
+                        f.setPosition(x * 120, y * 30);
                         stage.addActor(f);
                         f.setZIndex(2);
                         break;
-                    case 'h':
-                        MyActor h = new HienaActor(stage.game);
-                        h.setPosition(x*80, y*40);
-                        stage.addActor(h);
-                        h.setZIndex(2);
+
                 }
             }
         }
     }
 
 }
+
