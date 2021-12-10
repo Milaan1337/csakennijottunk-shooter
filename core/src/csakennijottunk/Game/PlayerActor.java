@@ -3,15 +3,17 @@ package csakennijottunk.Game;
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class PlayerActor extends OneSpriteStaticActor {
+public class PlayerActor extends OneSpriteAnimatedActor {
     boolean isJumping = false;
     float oldPos;
     boolean isFalling;
     boolean isMoving = true;
     public PlayerActor(MyGame game){
-        super(game, "green.png");
+        super(game, "HunterSprite.atlas");
+        setFps(20);
         this.setWidth(200);
         this.setHeight(150);
         this.setX(0);

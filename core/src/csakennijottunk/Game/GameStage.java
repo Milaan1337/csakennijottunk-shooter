@@ -91,7 +91,7 @@ public class GameStage extends MyStage {
         addActor(backButton);
 
         weaponChange = new WeaponChange(game);
-        weaponChange.setPosition(200, 200);
+        weaponChange.setPosition(400, 400);
         addActor(weaponChange);
 
         Level level = new Level(1,this);

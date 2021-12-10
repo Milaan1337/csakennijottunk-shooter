@@ -6,7 +6,7 @@ import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 public class FishFoodActor extends BallisticActor {
 
     public FishFoodActor(MyGame game, Ballistics2 ballistics, float waterHeight) {
-        super(game, "badlogic.jpg", ballistics, waterHeight);
+        super(game, "Arrow.png", ballistics, waterHeight);
         setSize(100,100);
     }
 }
