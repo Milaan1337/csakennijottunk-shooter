@@ -13,11 +13,12 @@ public class PlayerActor extends OneSpriteAnimatedActor {
     boolean isMoving = true;
     public PlayerActor(MyGame game){
         super(game, "HunterSprite.atlas");
-        setFps(20);
-        this.setWidth(200);
-        this.setHeight(150);
+        this.setWidth(75);
+        this.setHeight(75);
+        this.setZIndex(99999999);
         this.setX(0);
         this.setY(30);
+        this.setFps(10);
     }
 
 
@@ -39,16 +40,17 @@ public class PlayerActor extends OneSpriteAnimatedActor {
             this.setX(this.getX() + 3);
         }
         if (isJumping == true){
-            System.out.println("isJumping jó");
+            System.out.println("Jelenlegi pos" + this.getY());
+            System.out.println((501 - this.getHeight() + 9)/2 + "Ez a cél");
             float currentPos = this.getY();
-            if (currentPos >= 30 && currentPos < (501 - this.getHeight() + 9)/2) {
+            if (currentPos >= 30 && currentPos < (501 - this.getHeight() + 9)/2 + 7.5) {
                 System.out.println("pos jó");
                 this.setY(this.getY() + 15);
                 isFalling = false;
             }
         }
 
-        if (this.getY() == (501 - this.getHeight() + 9)/2){
+        if (this.getY() == (501 - this.getHeight() + 9)/2 + 7.5){
             fall();
         }
 

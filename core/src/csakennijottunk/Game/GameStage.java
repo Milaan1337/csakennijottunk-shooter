@@ -28,6 +28,7 @@ public class GameStage extends MyStage {
     ClickListener clickListener;
     BackToMenuButton backButton;
     BgActor bgActor;
+    BgActor bgActor2;
     BearActor bearActor;
     SimpleOverlapsUtil simpleOverlapsUtil;
     RestartButton restartButton;
@@ -81,11 +82,10 @@ public class GameStage extends MyStage {
         changeActor = new ChangeActor(game);
         changeActor.setZIndex(999999999);
         addActor(changeActor);
-        bgActor = new BgActor(game);
-        bgActor.setZIndex(1);
-        bgActor.setWidth(700);
-        bgActor.setHeight(500);
+
+        bgActor = new BgActor(game,-105);
         addActor(bgActor);
+
         backButton = new BackToMenuButton(game);
         backButton.setPosition(0, 300);
         addActor(backButton);
@@ -117,10 +117,19 @@ public class GameStage extends MyStage {
         ((CameraTrackingToActors)getCameraTracking()).addActor(playerActor);
         ((CameraTrackingToActors)getCameraTracking()).marginLeft = 0.1f;
         ((CameraTrackingToActors)getCameraTracking()).marginRight = 0.7f;
-        ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.5f;
         ((CameraTrackingToActors)getCameraTracking()).zoomSpeed = 0.05f;
+        if (bgActor.getStage() != null) {
+            for (int i = 1; i <= 100; i++) {
+                int count = (int) ((int) (-105 + (bgActor.getWidth()) * i));
 
-        addListener(clickListener = new ClickListener(){
+                bgActor2 = new BgActor(game,count);
+                addActor(bgActor2);
+                bgActor2.setZIndex(0);
+
+            }
+        }
+
+        playerActor.addListener(clickListener = new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -183,7 +192,6 @@ public class GameStage extends MyStage {
             bearActor.isMoving = false;
         }
         System.out.println("gameover");
-        bgActor.isMoving = false;
         backButton.isMoving = false;
         weaponChange.isMoving = false;
         gameOver = true;
@@ -201,6 +209,11 @@ public class GameStage extends MyStage {
                         GameOver();
                     }
 
+                }
+            }
+            if (a instanceof TreeActor){
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+                    GameOver();
                 }
             }
         }
@@ -231,6 +244,5 @@ public class GameStage extends MyStage {
                 }
             }
         }
-
     }
 }
