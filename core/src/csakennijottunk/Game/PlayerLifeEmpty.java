@@ -5,7 +5,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class PlayerLifeEmpty extends OneSpriteStaticActor {
     public PlayerLifeEmpty(MyGame game) {
-        super(game, "Heart.png");
+        super(game, "Heart2.png");
         setSize(50, 50);
     }
 }
