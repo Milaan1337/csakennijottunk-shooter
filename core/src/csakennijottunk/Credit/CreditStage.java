@@ -19,9 +19,9 @@ public class CreditStage extends MyStage {
 
         creditActor = new CreditActor(game);
         addActor(creditActor);
-        creditActor.setSize(888.8888888888889f,500);
+        creditActor.setSize(1100f,500);
         creditActor.setZIndex(1);
-        creditActor.setPosition(-194,0);
+        creditActor.setPosition(-300,0);
 
         backButton = new BackButton(game);
         backButton.setPosition(0, 0);
