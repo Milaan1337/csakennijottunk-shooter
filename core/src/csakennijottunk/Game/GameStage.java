@@ -88,7 +88,9 @@ public class GameStage extends MyStage {
         addActor(backButton);
 
         weaponChange = new WeaponChange(game);
-        weaponChange.setPosition(200, 200);
+        weaponChange.setPosition(400, 400);
+        weaponChange.setSize(100,100);
+        weaponChange.setZIndex(999999999);
         addActor(weaponChange);
 
         Level level = new Level(1,this);
@@ -222,47 +224,57 @@ public class GameStage extends MyStage {
         return isBowInHand;
     }
 
-    public void act(float delta){
+    public void act(float delta) {
         super.act(delta);
-        for (Actor a: getActors()) {
-            if (a instanceof BearActor){
-                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
-                    if (gameOver == false){
+        for (Actor a : getActors()) {
+            if (a instanceof BearActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
+                    if (gameOver == false) {
                         GameOver();
                     }
 
                 }
             }
-            if (a instanceof TreeActor){
-                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+            if (a instanceof TreeActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
                     GameOver();
                 }
             }
         }
-        for (Actor a: getActors()) {
-            if (a instanceof TreeActor){
-                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true){
+        for (Actor a : getActors()) {
+            if (a instanceof TreeActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
                     if (playerLife == 1) {
                         playerLife = playerLife - 1;
                         a.remove();
                         life1.remove();
-                        if (gameOver == false){
+                        if (gameOver == false) {
                             GameOver();
                         }
                     }
-                    if (playerLife == 2){
+                    if (playerLife == 2) {
                         playerLife = playerLife - 1;
                         a.remove();
                         life2.remove();
 
                     }
-                    if (playerLife == 3){
+                    if (playerLife == 3) {
                         playerLife = playerLife - 1;
                         a.remove();
                         life3.remove();
 
                     }
 
+                }
+            }
+            if (playerActor != null && weaponChange != null) {
+                weaponChange.setPosition(playerActor.getX() - 195, -30);
+            }
+            if (playerActor != null && backButton != null) {
+                backButton.setPosition(playerActor.getX() - 190, 410);
+
+            if (playerActor != null && restartButton != null) {
+                restartButton.setPosition(playerActor.getX() - 200, 350);
                 }
             }
         }
