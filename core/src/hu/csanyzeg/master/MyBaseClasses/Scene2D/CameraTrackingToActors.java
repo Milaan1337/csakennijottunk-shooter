@@ -72,7 +72,6 @@ public class CameraTrackingToActors extends CameraTracking {
                                 hz = (top - bottom) / (stage.getViewport().getWorldHeight() - stage.getViewport().getWorldHeight() * marginTop - stage.getViewport().getWorldHeight() * marginBottom)
                         )
                 );
-        System.out.println(wz + " ----- " + hz);
         orthographicCamera.zoom += (z - orthographicCamera.zoom) * zoomSpeed * delta_time * 60.0;
         //z = 1;
 

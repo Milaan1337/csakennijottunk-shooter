@@ -39,8 +39,12 @@ public class GameStage extends MyStage {
     PlayerLife life1;
     PlayerLife life2;
     PlayerLife life3;
+    BowActor bowActor;
+    BowPulled bowPulled;
     int playerLife = 3;
     boolean gameOver = false;
+
+
 
     public void generateFlying(){
         ArrayList<Actor> actors = new ArrayList<Actor>();
@@ -52,17 +56,11 @@ public class GameStage extends MyStage {
         for (Actor a:actors) {
             getActors().removeValue(a, true);
         }
+
         Ballistics2 ballistics2 = new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y);
-        for(float x = fisherManActor.get_handEnd().x; x < getViewport().getWorldWidth(); x+=20) {
+        for(float x = fisherManActor.get_handEnd().x; x < playerActor.getX() + 700; x+=20) {
             addActor(new FlyActor(game, x, ballistics2.getY(x)));
         }
-    }
-
-    public Vector2 getFishingRodEnd(){
-        Vector2 fishingRodEnd = new Vector2(fishingRod);
-        fishingRodEnd.rotate(fisherManActor.degree);
-        fishingRodEnd.add(fisherMan);
-        return fishingRodEnd;
     }
 
     public Actor getActor(Class c){
@@ -76,7 +74,6 @@ public class GameStage extends MyStage {
 
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        fisherManActor = new FisherManGroup(game);
         addBackButtonScreenBackByStackPopListener();
         setCameraResetToCenterOfScreen();
         changeActor = new ChangeActor(game);
@@ -109,8 +106,10 @@ public class GameStage extends MyStage {
         life3.setPosition(450, 0);
         addActor(life3);
 
-        bearActor = (BearActor) getActor(BearActor.class);
+        bowActor = new BowActor(game);
+        addActor(bowActor);
 
+        bearActor = (BearActor) getActor(BearActor.class);
         playerActor = (PlayerActor) getActor(PlayerActor.class);
         setCameraTracking(new CameraTrackingToActors());
         ((OrthographicCamera)getCamera()).zoom = 0.1f;
@@ -138,6 +137,19 @@ public class GameStage extends MyStage {
                 }
             }
         });
+        bowActor.addListener(clickListener = new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (playerActor.isMoving == true) {
+                    playerActor.jump();
+                }
+            }
+        });
+
+        if (playerActor.getStage() != null) {
+            fisherManActor = new FisherManGroup(game, playerActor.getX(), playerActor.getY(), playerActor.getX() - 15, playerActor.getY() - 15, playerActor.getX() - 30, playerActor.getY());
+        }
         weaponChange.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -145,8 +157,16 @@ public class GameStage extends MyStage {
                 isBowInHand = !getState();
                 if (getState() == true){
                     playerActor.isMoving = false;
+                    playerActor.setFps(0);
                 }else{
                     playerActor.isMoving = true;
+                    playerActor.setFps(20);
+                    ArrayList<Actor> actors = new ArrayList<Actor>();
+                    for (Actor a:getActors()) {
+                        if (a instanceof FlyActor){
+                            a.remove();
+                        }
+                    }
                 }
             }
         });
@@ -158,6 +178,7 @@ public class GameStage extends MyStage {
                 if (isBowInHand == true) {
                     fisherManActor.set_angle(heightToDegree(y));
                     fisherManActor.set_speed(widthToSpeed(x));
+                    fisherManActor.setPos(playerActor.getX() + playerActor.getWidth() / 2,playerActor.getY() + playerActor.getHeight() / 2);
                     generateFlying();
                     playerActor.isMoving = false;
                 }
@@ -168,6 +189,7 @@ public class GameStage extends MyStage {
                 super.touchUp(event, x, y, pointer, button);
                 if (isBowInHand == true) {
                     addActor(fishFoodActor = new FishFoodActor(game, new Ballistics2(fisherManActor.v0, MathUtils.degreesToRadians * fisherManActor.degree, fisherManActor.get_handEnd().x, fisherManActor.get_handEnd().y), 120));
+
                     //((CameraTrackingToActors)getCameraTracking()).addActor(fishFoodActor);
                 }
             }
@@ -243,6 +265,13 @@ public class GameStage extends MyStage {
 
                 }
             }
+        }
+        if (playerActor.getStage() != null && weaponChange.getStage() != null) {
+            weaponChange.setPosition(playerActor.getX() + 20,getHeight() - weaponChange.getHeight() - 25);
+        }
+
+        if (playerActor.getStage() != null){
+            bowActor.setPosition(playerActor.getX() + playerActor.getWidth() / 2 - 10 - bowActor.getWidth()/2,playerActor.getY() + playerActor.getHeight() / 2 - bowActor.getHeight() / 2);
         }
     }
 }
