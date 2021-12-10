@@ -9,8 +9,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class BackToMenuButton extends OneSpriteStaticActor {
     ClickListener c1;
-    boolean isMoving = true;
-
     public BackToMenuButton(MyGame game) {
         super(game, "BackButton.png");
         this.setSize(50, 50);
