@@ -30,31 +30,3 @@ repeat: none
    orig: 32, 16
    offset: 0, 0
    index: -1
-4
-   rotate: false
-   xy: 0, 32
-   size: 64, 32
-   orig: 32, 16
-   offset: 0, 0
-   index: -1
-5
-   rotate: false
-   xy: 64, 32
-   size: 64, 32
-   orig: 32, 16
-   offset: 0, 0
-   index: -1
-6
-   rotate: false
-   xy: 128, 32
-   size: 64, 32
-   orig: 32, 16
-   offset: 0, 0
-   index: -1
-7
-   rotate: false
-   xy: 192, 32
-   size: 64, 32
-   orig: 32, 16
-   offset: 0, 0
-   index: -1
