@@ -1,5 +1,6 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
@@ -46,6 +47,7 @@ public class GameStage extends MyStage {
     FoxActor foxActor;
     BowPulled bowPulled;
     LionActor lionActor;
+    MyLabel loseLabel;
     EmptyActor emptyActor;
     int playerLife = 3;
     boolean gameOver = false;
@@ -93,7 +95,7 @@ public class GameStage extends MyStage {
         labelStyle.font = game.getMyAssetManager().getFont("appopaint.otf");
         labelStyle.fontColor = Color.BLACK;
 
-        MyLabel loseLabel = new MyLabel(game, "Sajnos vesztettél, próbálkozz újra.", labelStyle);
+        loseLabel = new MyLabel(game, "", labelStyle);
         //startLabel.setFontScale(2);
         loseLabel.setPosition(150, 280);
         loseLabel.setHeight(50);
@@ -265,6 +267,7 @@ public class GameStage extends MyStage {
     public void GameOver(){
         addActor(restartButton = new RestartButton(game));
         playerActor.isMoving = false;
+        loseLabel.setText("Sajnos vesztettél, próbálkozz újra!");
         if (bearActor != null){
             bearActor.stop();
             bearActor.isMoving = false;
@@ -283,9 +286,7 @@ public class GameStage extends MyStage {
         for (Actor a : getActors()) {
             if (a instanceof BearActor) {
                 if (SimpleOverlapsUtil.overlaps(a, playerActor) == true) {
-                    if (gameOver == false) {
-
-                    }
+                    GameOver();
             }
         }
             if (a instanceof TreeActor) {
