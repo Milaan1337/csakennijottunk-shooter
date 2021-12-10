@@ -6,8 +6,10 @@ import com.badlogic.gdx.files.FileHandle;
 import csakennijottunk.Game.BearActor;
 import csakennijottunk.Game.GrassActor;
 import csakennijottunk.Game.PlayerActor;
+import csakennijottunk.Game.RabbitActor;
 import csakennijottunk.Game.TreeActor;
 import csakennijottunk.Game.TreeActor2;
+import csakennijottunk.Game.WolfActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
@@ -74,11 +76,23 @@ public class Level {
                         m.setZIndex(5);
                         stage.addActor(m);
                         break;
+                    case 'r':
+                        MyActor r = new RabbitActor(stage.game);
+                        r.setPosition(x*30, y*30);
+                        r.setZIndex(5);
+                        stage.addActor(r);
+                        break;
                     case 'x':
                         MyActor d = new TreeActor(stage.game);
                         d.setPosition(x*50, y * 30);
                         stage.addActor(d);
                         d.setZIndex(4);
+                        break;
+                    case 'w':
+                        MyActor w = new WolfActor(stage.game);
+                        w.setPosition(x*50, y * 30);
+                        stage.addActor(w);
+                        w.setZIndex(4);
                         break;
                     case 't':
                         MyActor t = new TreeActor2(stage.game);

@@ -39,9 +39,11 @@ public class MenuStage extends MyStage {
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         background = new MenuBackground(game);
-        background.setSize(888.88888888f, 500);
+        background.setPosition(-300,0);
+        background.setSize(1100f, 500);
         addActor(background);
         addBackButtonScreenBackByStackPopListener();
+        setCameraResetToCenterOfScreen();
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getMyAssetManager().getFont("appopaint.otf");
@@ -49,7 +51,7 @@ public class MenuStage extends MyStage {
 
         MyLabel startLabel = new MyLabel(game, "Start", labelStyle);
         //startLabel.setFontScale(2);
-        startLabel.setPosition(340, 280);
+        startLabel.setPosition(150, 280);
         startLabel.setHeight(105);
         startLabel.setWidth(275);
         startLabel.setAlignment(1);
@@ -57,7 +59,7 @@ public class MenuStage extends MyStage {
 
         MyLabel creditLabel = new MyLabel(game, "Credit", labelStyle);
         //creditLabel.setFontScale(2);
-        creditLabel.setPosition(345, 145);
+        creditLabel.setPosition(155, 145);
         creditLabel.setHeight(110);
         creditLabel.setWidth(270);
         creditLabel.setAlignment(1);
@@ -65,7 +67,7 @@ public class MenuStage extends MyStage {
 
         MyLabel exitLabel = new MyLabel(game, "Exit", labelStyle);
         //exitLabel.setFontScale(2);
-        exitLabel.setPosition(340, 0);
+        exitLabel.setPosition(155, 0);
         exitLabel.setHeight(95);
         exitLabel.setWidth(280);
         exitLabel.setAlignment(1);
