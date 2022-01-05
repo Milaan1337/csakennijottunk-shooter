@@ -17,5 +17,6 @@ public class GameScreen extends MyScreen {
     @Override
     protected void afterAssetsLoaded() {
         addStage(new GameStage(game), 1, true);
+        addStage(new GameStageForBUttons(game), 2, true);
     }
 }

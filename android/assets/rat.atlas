@@ -1,0 +1,25 @@
+rat.png
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0
+   rotate: false
+   xy: 0, 0
+   size: 42, 18
+   orig: 21, 9
+   offset: 0, 0
+   index: -1
+1
+   rotate: false
+   xy: 42, 0
+   size: 42, 18
+   orig: 21, 9
+   offset: 0, 0
+   index: -1
+2
+   rotate: false
+   xy: 84, 0
+   size: 42, 18
+   orig: 21, 9
+   offset: 0, 0
+   index: -1

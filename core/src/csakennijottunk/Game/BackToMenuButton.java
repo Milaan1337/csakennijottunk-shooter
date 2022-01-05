@@ -9,29 +9,11 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class BackToMenuButton extends OneSpriteStaticActor {
     ClickListener c1;
-    boolean isMoving = true;
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        if (isMoving == true) {
-            this.setX(this.getX() + 1);
-        }
-    }
-
     public BackToMenuButton(MyGame game) {
         super(game, "BackButton.png");
         this.setSize(50, 50);
         this.setPosition(0, 0);
 
-        this.addListener(c1 = new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                game.getMyAssetManager().getSound("click.mp3").play();
-                game.setScreen(new MenuScreen(game));
 
-            }
-        });
     }
 }

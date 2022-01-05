@@ -1,16 +1,14 @@
 package csakennijottunk.Game;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class BearActor extends OneSpriteAnimatedActor {
+public class HienaActor extends OneSpriteAnimatedActor {
     boolean isMoving = true;
-    public BearActor(MyGame game) {
-        super(game, "bear.atlas");
-        setFps(20);
+
+    public HienaActor(MyGame game) {
+        super(game, "HyenaSprite.atlas");
     }
 
     @Override

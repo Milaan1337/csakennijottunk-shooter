@@ -39,9 +39,11 @@ public class MenuStage extends MyStage {
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         background = new MenuBackground(game);
-        background.setSize(888.88888888f, 500);
+        background.setPosition(-300,0);
+        background.setSize(1100f, 500);
         addActor(background);
         addBackButtonScreenBackByStackPopListener();
+        setCameraResetToCenterOfScreen();
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getMyAssetManager().getFont("appopaint.otf");
@@ -49,7 +51,7 @@ public class MenuStage extends MyStage {
 
         MyLabel startLabel = new MyLabel(game, "Start", labelStyle);
         //startLabel.setFontScale(2);
-        startLabel.setPosition(340, 280);
+        startLabel.setPosition(150, 280);
         startLabel.setHeight(105);
         startLabel.setWidth(275);
         startLabel.setAlignment(1);
@@ -57,7 +59,7 @@ public class MenuStage extends MyStage {
 
         MyLabel creditLabel = new MyLabel(game, "Credit", labelStyle);
         //creditLabel.setFontScale(2);
-        creditLabel.setPosition(345, 145);
+        creditLabel.setPosition(155, 145);
         creditLabel.setHeight(110);
         creditLabel.setWidth(270);
         creditLabel.setAlignment(1);
@@ -65,7 +67,7 @@ public class MenuStage extends MyStage {
 
         MyLabel exitLabel = new MyLabel(game, "Exit", labelStyle);
         //exitLabel.setFontScale(2);
-        exitLabel.setPosition(340, 0);
+        exitLabel.setPosition(155, 0);
         exitLabel.setHeight(95);
         exitLabel.setWidth(280);
         exitLabel.setAlignment(1);
@@ -99,7 +101,7 @@ public class MenuStage extends MyStage {
                     @Override
                     public void onTick(OneTickTimer sender, float correction) {
                         super.onTick(sender, correction);
-                        game.setScreenBackByStackPop();
+                        System.exit(0);
                     }
                 }));
 
@@ -112,8 +114,8 @@ public class MenuStage extends MyStage {
 
 
 
-        /*setCameraTracking(new CameraTrackingToActors());
-        RandomXS128 r = new RandomXS128();
+        setCameraTracking(new CameraTrackingToActors());
+        /*RandomXS128 r = new RandomXS128();
         for(int i = 0; i< 10; i++){
             OneSpriteStaticActor oneSpriteStaticActor = new OneSpriteStaticActor(game, "fa.png"){
                 public float rx, ry;
@@ -121,15 +123,17 @@ public class MenuStage extends MyStage {
                 @Override
                 public void init() {
                     super.init();
-                    rx = r.nextFloat() * 3;
-                    ry = r.nextFloat() * 3;
+                    rx = r.nextFloat() * 2 - 1;
+                    ry = r.nextFloat() * 2 - 1;
+                    //rx= 0;
+                    //ry = -1;
                 }
 
                 @Override
                 public void act(float delta) {
                     super.act(delta);
-                    setX(getX() + rx - 0.5f);
-                    setY(getY() + ry - 0.5f);
+                    setX(getX() + rx);
+                    setY(getY() + ry);
                 }
             };
             oneSpriteStaticActor.setSize(30,30);
@@ -137,6 +141,7 @@ public class MenuStage extends MyStage {
             //oneSpriteStaticActor.setPosition(200,100);
             addActor(oneSpriteStaticActor);
             ((CameraTrackingToActors)getCameraTracking()).addActor(oneSpriteStaticActor);
+
         }*/
     }
 }

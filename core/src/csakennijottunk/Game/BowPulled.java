@@ -3,9 +3,9 @@ package csakennijottunk.Game;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class TreeActor extends OneSpriteStaticActor {
-    public TreeActor(MyGame game) {
-        super(game, "TreeBarrier.png");
-        this.setSize(30,30);
+public class BowPulled extends OneSpriteStaticActor {
+    public BowPulled(MyGame game) {
+        super(game, "BowPulled.png");
+        this.setSize(60,60);
     }
 }
